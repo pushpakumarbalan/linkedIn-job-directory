@@ -1165,6 +1165,7 @@ US
 * [University of Miami](https://www.linkedin.com/school/university-of-miami/jobs/)
 * [University of South Carolina](https://www.linkedin.com/school/university-of-south-carolina/jobs/)
 * [Boston College](https://www.linkedin.com/school/boston-college/jobs/)
+* [University of Phoenix ](https://www.linkedin.com/school/university-of-phoenix/jobs/)
 * [Louisiana State University](https://www.linkedin.com/school/louisiana-state-university/jobs/)
 * [Temple University](https://www.linkedin.com/school/temple-university/jobs/)
 * [University of North Texas](https://www.linkedin.com/school/university-of-north-texas/jobs/)
