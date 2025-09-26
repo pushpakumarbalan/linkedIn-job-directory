@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://pushpakumarbalan.github.io/linkedIn-job-directory/sitemap.xml
