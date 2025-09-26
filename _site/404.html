@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.title | escape }}</title>
-    <meta name="description" content="{{ site.description | escape }}">
+    <title>Page Not Found</title>
+    <meta name="description" content="Your comprehensive gateway to career opportunities at top companies and universities worldwide. Find direct links to LinkedIn job pages and connect with potential referrers.">
     
     <!-- CSS Styles -->
     <style>
@@ -403,7 +403,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>{{ site.title | default: "LinkedIn Job Directory" }}</h1>
+            <h1>LinkedIn Job Directory</h1>
             <p class="header-subtitle">Access direct links to LinkedIn job pages for hundreds of top companies and universities worldwide. Perfect for job seekers, students and professionals looking for career opportunities.</p>
             
             <div class="search-container">
@@ -425,7 +425,32 @@
     <main id="top">
         <div class="container">
             <div class="content-section">
-                {{ content }}
+                <div style="text-align: center; padding: 60px 20px;">
+    <h1 style="font-size: 6rem; color: var(--primary-color); margin-bottom: 20px;">404</h1>
+    <h2 style="color: var(--text-secondary); margin-bottom: 20px;">Page Not Found</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem;">
+        The page you're looking for doesn't exist. But don't worry, there are plenty of job opportunities waiting for you!
+    </p>
+    
+    <div style="margin: 30px 0;">
+        <a href="/" 
+           style="background: var(--primary-color); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; margin: 0 10px; display: inline-block; transition: all 0.3s ease;">
+            🏠 Go Home
+        </a>
+        <a href="/#Company-wise" 
+           style="background: var(--secondary-color); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; margin: 0 10px; display: inline-block; transition: all 0.3s ease;">
+            🏢 Browse Companies
+        </a>
+    </div>
+    
+    <div style="margin-top: 40px;">
+        <h3 style="color: var(--primary-color); margin-bottom: 15px;">Quick Search</h3>
+        <input type="text" 
+               placeholder="Search for companies or universities..." 
+               style="padding: 12px 20px; border: 2px solid var(--primary-color); border-radius: 25px; width: 100%; max-width: 400px; font-size: 16px;"
+               onkeypress="if(event.key==='Enter') window.location.href='/?search=' + encodeURIComponent(this.value)">
+    </div>
+</div>
             </div>
         </div>
     </main>

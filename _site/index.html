@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Job Directory - Find Your Dream Job!</title>
+    <meta name="description" content="Your comprehensive gateway to career opportunities at top companies and universities worldwide. Find direct links to LinkedIn job pages and connect with potential referrers.">
+    
+    <!-- CSS Styles -->
+    <style>
+        :root {
+            --primary-color: #0077b5;
+            --secondary-color: #00a0dc;
+            --accent-color: #f3f2ef;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --hover-color: #005582;
+            --background-light: #ffffff;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Content centering improvements */
+        .content-centered {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .header-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            box-shadow: var(--shadow);
+        }
+        
+        #searchInput::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background: var(--background-light);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 120px;
+            z-index: 99;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Main Content */
+        main {
+            background: var(--background-light);
+            min-height: calc(100vh - 200px);
+            padding: 0;
+        }
+        
+        .content-section {
+            background: var(--background-light);
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        /* Hero Section - Remove top spacing */
+        .hero-section {
+            background: var(--background-light);
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .hero-section .social-share {
+            padding: 15px 0 30px 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Center tables and lists but keep text left-aligned */
+        .content-section table {
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .content-section h2, 
+        .content-section h3, 
+        .content-section h4 {
+            text-align: center;
+            margin: 30px auto 20px auto;
+        }
+        
+        .content-section ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-section > div[align="right"] {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        /* Company Grid */
+        .alphabet-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px auto;
+            padding: 20px;
+            background: var(--accent-color);
+            border-radius: 10px;
+            max-width: 700px;
+        }
+        
+        .alphabet-nav a {
+            display: inline-block;
+            padding: 8px 12px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .alphabet-nav a:hover {
+            background: var(--hover-color);
+            transform: scale(1.1);
+        }
+        
+        .company-section {
+            margin: 30px 0;
+        }
+        
+        .company-section h4 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .company-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+            justify-content: center;
+        }
+        
+        .company-list li {
+            list-style: none;
+        }
+        
+        .company-list a {
+            display: block;
+            padding: 12px 15px;
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .company-list a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* University Section */
+        .university-section {
+            margin: 40px 0;
+        }
+        
+        .university-section h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        /* Back to Top */
+        .back-to-top {
+            text-align: right;
+            margin: 20px 0;
+        }
+        
+        .back-to-top a {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top a:hover {
+            background: var(--hover-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        /* Social Share Buttons */
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .social-share img {
+            transition: transform 0.3s ease;
+        }
+        
+        .social-share img:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .content-section {
+                padding: 20px;
+                margin: 15px;
+                max-width: none;
+            }
+            
+            .nav-tabs {
+                gap: 10px;
+            }
+            
+            .nav-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .company-list {
+                grid-template-columns: 1fr;
+                max-width: none;
+            }
+            
+            .alphabet-nav {
+                gap: 5px;
+                max-width: none;
+            }
+            
+            .alphabet-nav a {
+                padding: 6px 10px;
+                min-width: 35px;
+            }
+            
+            .nav-container {
+                top: 100px;
+            }
+            
+            .content-section ul {
+                max-width: none;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid var(--accent-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Hide/Show functionality */
+        .hidden {
+            display: none;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>LinkedIn Job Directory</h1>
+            <p class="header-subtitle">Access direct links to LinkedIn job pages for hundreds of top companies and universities worldwide. Perfect for job seekers, students and professionals looking for career opportunities.</p>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search companies or universities...">
+            </div>
+        </div>
+    </header>
+    
+    <nav class="nav-container">
+        <div class="container">
+            <div class="nav-tabs">
+                <a href="#Company-wise" class="nav-tab active" onclick="showSection('companies')">Companies</a>
+                <a href="#University-wise" class="nav-tab" onclick="showSection('universities')">Universities</a>
+                <a href="#contributing" class="nav-tab" onclick="showSection('contributing')">Contributing</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main id="top">
+        <div class="container">
+            <div class="content-section">
+                <div class="hero-section" style="margin: 0; padding: 0;">
+  <div class="social-share" style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 0; padding: 10px 0;">
+    <!-- Ordered by global popularity/usage -->
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpushpakumar.com%2Fprojects%2FlinkedIn-job-directory&amp;quote=🚀%20Found%20an%20amazing%20LinkedIn%20Job%20Directory%20with%20direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies%20and%20universities%20worldwide!%20Perfect%20for%20job%20seekers%20and%20professionals.%20%23JobSearch" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Facebook-1877F2?style=flat&amp;logo=facebook&amp;logoColor=white" alt="Share on Facebook" />
+    </a>
+    <a href="https://api.whatsapp.com/send?text=🚀%20Found%20an%20amazing%20LinkedIn%20Job%20Directory!%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies%20and%20universities%20worldwide.%20Perfect%20for%20job%20seekers!%20%0A%0ACheck%20it%20out:%20https://pushpakumarbalan.github.io/linkedIn-job-directory" target="_blank">
+      <img src="https://img.shields.io/badge/Share-WhatsApp-25D366?style=flat&amp;logo=whatsapp&amp;logoColor=white" alt="Share on WhatsApp" />
+    </a>
+    <a href="https://twitter.com/intent/tweet?text=🚀%20Just%20discovered%20this%20comprehensive%20LinkedIn%20Job%20Directory!%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies%20and%20universities%20worldwide.%20Perfect%20for%20job%20seekers%20and%20professionals!%20%23JobSearch%20%23LinkedIn%20%23CareerOpportunities&amp;url=https://pushpakumarbalan.github.io/linkedIn-job-directory" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Twitter-1DA1F2?style=flat&amp;logo=twitter&amp;logoColor=white" alt="Share on Twitter" />
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fpushpakumarbalan.github.io%2FlinkedIn-job-directory" target="_blank">
+      <img src="https://img.shields.io/badge/Share-LinkedIn-0A66C2?style=flat&amp;logo=linkedin&amp;logoColor=white" alt="Share on LinkedIn" />
+    </a>
+    <a href="https://t.me/share/url?url=https%3A%2F%2Fpushpakumarbalan.github.io%2FlinkedIn-job-directory&amp;text=🚀%20Check%20out%20this%20comprehensive%20LinkedIn%20Job%20Directory!%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies%20and%20universities%20worldwide.%20Perfect%20for%20job%20seekers!" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Telegram-26A5E4?style=flat&amp;logo=telegram&amp;logoColor=white" alt="Share on Telegram" />
+    </a>
+    <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fpushpakumarbalan.github.io%2FlinkedIn-job-directory&amp;title=🚀%20LinkedIn%20Job%20Directory%20-%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies&amp;text=Found%20this%20amazing%20resource!%20Comprehensive%20directory%20with%20direct%20LinkedIn%20job%20page%20links%20for%20top%20companies%20and%20universities%20worldwide.%20LinkedIn%20Job%20Directory." target="_blank">
+      <img src="https://img.shields.io/badge/Share-Reddit-FF4500?style=flat&amp;logo=reddit&amp;logoColor=white" alt="Share on Reddit" />
+    </a>
+    <a href="https://bsky.app/intent/compose?text=🚀%20Just%20discovered%20this%20comprehensive%20LinkedIn%20Job%20Directory!%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies%20and%20universities%20worldwide.%20Perfect%20for%20job%20seekers!%20https://pushpakumarbalan.github.io/linkedIn-job-directory" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Bluesky-00A8E8?style=flat&amp;logo=bluesky&amp;logoColor=white" alt="Share on Bluesky" />
+    </a>
+    <a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fpushpakumarbalan.github.io%2FlinkedIn-job-directory&amp;t=LinkedIn%20Job%20Directory%20-%20Direct%20links%20to%20job%20pages%20for%20hundreds%20of%20top%20companies" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Hacker%20News-FF6600?style=flat&amp;logo=ycombinator&amp;logoColor=white" alt="Share on Hacker News" />
+    </a>
+    <a href="https://discord.com/channels/@me" onclick="navigator.clipboard.writeText('🚀 Check out this LinkedIn Job Directory! Direct links to job pages for hundreds of top companies and universities worldwide: https://pushpakumarbalan.github.io/linkedIn-job-directory'); alert('Link copied to clipboard! Paste it in Discord.');" target="_blank">
+      <img src="https://img.shields.io/badge/Share-Discord-5865F2?style=flat&amp;logo=discord&amp;logoColor=white" alt="Share on Discord" />
+    </a>
+  </div>
+  
+
+</div>
+
+<h2 tabindex="-1" class="heading-element" dir="auto"><a href="#Company-wise">Company-wise</a></h2>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="#-companies">#</a></td>
+<td align="center"><a href="#a-companies">A</a></td>
+<td align="center"><a href="#b-companies">B</a></td>
+<td align="center"><a href="#c-companies">C</a></td>
+<td align="center"><a href="#d-companies">D</a></td>
+<td align="center"><a href="#e-companies">E</a></td>
+<td align="center"><a href="#f-companies">F</a></td>
+<td align="center"><a href="#g-companies">G</a></td>
+<td align="center"><a href="#h-companies">H</a></td>
+</tr>
+<tr>
+<td align="center"><a href="#i-companies">I</a></td>
+<td align="center"><a href="#j-companies">J</a></td>
+<td align="center"><a href="#k-companies">K</a></td>
+<td align="center"><a href="#l-companies">L</a></td>
+<td align="center"><a href="#m-companies">M</a></td>
+<td align="center"><a href="#n-companies">N</a></td>
+<td align="center"><a href="#o-companies">O</a></td>
+<td align="center"><a href="#p-companies">P</a></td>
+<td align="center"><a href="#q-companies">Q</a></td>
+</tr>
+<tr>
+<td align="center"><a href="#r-companies">R</a></td>
+<td align="center"><a href="#s-companies">S</a></td>
+<td align="center"><a href="#t-companies">T</a></td>
+<td align="center"><a href="#u-companies">U</a></td>
+<td align="center"><a href="#v-companies">V</a></td>
+<td align="center"><a href="#w-companies">W</a></td>
+<td align="center"><a href="#x-companies">X</a></td>
+<td align="center"><a href="#y-companies">Y</a></td>
+<td align="center"><a href="#z-companies">Z</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Company-wise</h2>
+
+<h4># companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/2k-games/jobs/">2K</a></li>
+  <li><a href="https://www.linkedin.com/company/3m/jobs/">3M</a></li>
+  <li><a href="https://www.linkedin.com/company/6sense/jobs/">6sense</a></li>
+  <li><a href="https://www.linkedin.com/company/10xgenomics/jobs/">10x Genomics</a></li>
+  <li><a href="https://www.linkedin.com/company/23andme/jobs/">23andMe</a></li>
+</ul>
+
+<h4>A companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/abb/jobs/">ABB</a></li>
+  <li><a href="https://www.linkedin.com/company/abbvie/jobs/">AbbVie</a></li>
+  <li><a href="https://www.linkedin.com/company/accenture/jobs/">Accenture</a></li>
+  <li><a href="https://www.linkedin.com/company/accelya/jobs/">Accelya</a></li>
+  <li><a href="https://www.linkedin.com/company/activision-blizzard/jobs/">Activision Blizzard</a></li>
+  <li><a href="https://www.linkedin.com/company/activision/jobs/">Activision</a></li>
+  <li><a href="https://www.linkedin.com/company/adecco/jobs/">Adecco</a></li>
+  <li><a href="https://www.linkedin.com/company/adp/jobs/">ADP</a></li>
+  <li><a href="https://www.linkedin.com/company/adobe/jobs">Adobe</a></li>
+  <li><a href="https://www.linkedin.com/company/affable/jobs/">Affable</a></li>
+  <li><a href="https://www.linkedin.com/company/affinity-com/jobs/">Affinity Global Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/affirm/jobs/">Affirm</a></li>
+  <li><a href="https://www.linkedin.com/company/agilent-technologies/jobs/">Agilent Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/akamai-technologies/jobs/">Akamai Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/akuna-capital/jobs/">Akuna Capital</a></li>
+  <li><a href="https://www.linkedin.com/company/agoda/jobs/">Agoda</a></li>
+  <li><a href="https://www.linkedin.com/company/airbnb/jobs/">Airbnb</a></li>
+  <li><a href="https://www.linkedin.com/company/airbusgroup/jobs/">Airbus</a></li>
+  <li><a href="https://www.linkedin.com/company/airtable/jobs/">Airtable</a></li>
+  <li><a href="https://www.linkedin.com/company/algolia/jobs/">Algolia</a></li>
+  <li><a href="https://www.linkedin.com/company/allegro-pl/jobs/">Allegro</a></li>
+  <li><a href="https://www.linkedin.com/company/allstate/jobs/">Allstate</a></li>
+  <li><a href="https://www.linkedin.com/company/chinese-alibaba-group/jobs/">Alibaba Group</a></li>
+  <li><a href="https://www.linkedin.com/company/amagicorporation/jobs/">Amagi Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/amazon/jobs">Amazon</a></li>
+  <li><a href="https://www.linkedin.com/company/lab126/jobs/">Amazon Lab126</a></li>
+  <li><a href="https://www.linkedin.com/company/amd/jobs/">AMD</a></li>
+  <li><a href="https://www.linkedin.com/company/amdocs/jobs/">Amdocs</a></li>
+  <li><a href="https://www.linkedin.com/company/american-express/jobs/">American Express</a></li>
+  <li><a href="https://www.linkedin.com/company/amgen/jobs/">Amgen</a></li>
+  <li><a href="https://www.linkedin.com/company/amplifyinc/jobs/">Amplify</a></li>
+  <li><a href="https://www.linkedin.com/company/amplitude-analytics/jobs/">Amplitude</a></li>
+  <li><a href="https://www.linkedin.com/company/analog-devices/jobs/">Analog Devices</a></li>
+  <li><a href="https://www.linkedin.com/company/and_digital/jobs/">AND Digital</a></li>
+  <li><a href="https://www.linkedin.com/company/andurilindustries/jobs/">Anduril Industries</a></li>
+  <li><a href="https://www.linkedin.com/company/anomaly/jobs/">Anomaly</a></li>
+  <li><a href="https://www.linkedin.com/company/ansys-inc/jobs/">Ansys</a></li>
+  <li><a href="https://www.linkedin.com/company/anthem-inc/jobs/">Anthem</a></li>
+  <li><a href="https://www.linkedin.com/company/aon/jobs/">Aon</a></li>
+  <li><a href="https://www.linkedin.com/company/appdynamics/">AppDynamics</a></li>
+  <li><a href="https://www.linkedin.com/company/apptio/jobs/">Apptio</a></li>
+  <li><a href="https://www.linkedin.com/company/appian-corporation/jobs/">Appian Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/apple/jobs/">Apple</a></li>
+  <li><a href="https://www.linkedin.com/company/applied-materials/jobs/">Applied Materials</a></li>
+  <li><a href="https://www.linkedin.com/company/apolloio/jobs/">Apollo.io</a></li>
+  <li><a href="https://www.linkedin.com/company/apollo-global-management-inc/jobs/">Apollo Global Management, Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/applause/jobs/">Applause</a></li>
+  <li><a href="https://www.linkedin.com/company/applyboard/jobs/">ApplyBoard</a></li>
+  <li><a href="https://www.linkedin.com/company/arcadiahq/jobs/">Arcadia</a></li>
+  <li><a href="https://www.linkedin.com/company/arcesium/jobs/">Arcesium</a></li>
+  <li><a href="https://www.linkedin.com/company/argonne-national-laboratory/jobs/">Argonne National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/arm/jobs/">ARM</a></li>
+  <li><a href="https://www.linkedin.com/company/arm-holdings/jobs/">ARM Holdings</a></li>
+  <li><a href="https://www.linkedin.com/company/ascendion/jobs/">Ascendion</a></li>
+  <li><a href="https://www.linkedin.com/company/arista-networks-inc/jobs/">Arista Networks</a></li>
+  <li><a href="https://www.linkedin.com/company/asana/jobs/">Asana</a></li>
+  <li><a href="https://www.linkedin.com/company/asml/jobs/">ASML</a></li>
+  <li><a href="https://www.linkedin.com/company/atlassian/jobs/">Atlassian</a></li>
+  <li><a href="https://www.linkedin.com/company/astrazeneca/jobs/">AstraZeneca</a></li>
+  <li><a href="https://www.linkedin.com/company/asus/jobs/">ASUS</a></li>
+  <li><a href="https://www.linkedin.com/company/att/jobs/">AT&amp;T</a></li>
+  <li><a href="https://www.linkedin.com/company/athenahealth/jobs/">Athenahealth</a></li>
+  <li><a href="https://www.linkedin.com/company/atob-transportation-technology/jobs/">Atob</a></li>
+  <li><a href="https://www.linkedin.com/company/audible/jobs/">Audible</a></li>
+  <li><a href="https://www.linkedin.com/company/anthropicresearch/jobs/">Anthropic</a></li>
+  <li><a href="https://www.linkedin.com/company/avanade/jobs/">Avanade</a></li>
+  <li><a href="https://www.linkedin.com/company/avaya/jobs/">Avaya</a></li>
+  <li><a href="https://www.linkedin.com/company/avenuecode/jobs/">Avenue Code</a></li>
+  <li><a href="https://www.linkedin.com/company/audible/jobs/">Audible</a></li>
+  <li><a href="https://www.linkedin.com/company/auroradriver/jobs/">Aurora</a></li>
+  <li><a href="https://www.linkedin.com/company/autodesk/jobs/">Autodesk</a></li>
+  <li><a href="https://www.linkedin.com/company/automation-anywhere/jobs/">Automation Anywhere</a></li>
+  <li><a href="https://www.linkedin.com/company/autozone/jobs/">AutoZone</a></li>
+  <li><a href="https://www.linkedin.com/company/amazon-web-services/jobs/">AWS</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>B companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/babbel-com/jobs/">Babbel</a></li>
+  <li><a href="https://www.linkedin.com/company/bae-systems/jobs/">BAE Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/bain-and-company/jobs/">Bain &amp; Company</a></li>
+  <li><a href="https://www.linkedin.com/company/bain-capital/jobs/">Bain Capital</a></li>
+  <li><a href="https://www.linkedin.com/company/bank-of-america/jobs/">Bank of America</a></li>
+  <li><a href="https://www.linkedin.com/company/balyasny-asset-management-l.p./jobs/">Balyasny Asset Management L.P.</a></li>
+  <li><a href="https://www.linkedin.com/company/barclays-bank/jobs/">Barclays</a></li>
+  <li><a href="https://www.linkedin.com/company/baker-hughes/jobs/">Baker Hughes</a></li>
+  <li><a href="https://www.linkedin.com/company/baxter-healthcare/jobs/">Baxter International Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/bazaarvoice/jobs/">Bazaarvoice</a></li>
+  <li><a href="https://www.linkedin.com/company/bbc/jobs/">BBC</a></li>
+  <li><a href="https://www.linkedin.com/company/bd1/jobs/">BD</a></li>
+  <li><a href="https://www.linkedin.com/company/benchling/jobs/">Benchling</a></li>
+  <li><a href="https://www.linkedin.com/company/bendingspoons/jobs/">Bending Spoons</a></li>
+  <li><a href="https://www.linkedin.com/company/bento-box-entertainment/jobs/">Bentobox</a></li>
+  <li><a href="https://www.linkedin.com/company/lawrence-berkeley-national-laboratory/jobs/">Berkeley Lab</a></li>
+  <li><a href="https://www.linkedin.com/company/betterdotcom/jobs/">Better.com</a></li>
+  <li><a href="https://www.linkedin.com/company/bharatpe/jobs/">BharatPe</a></li>
+  <li><a href="https://www.linkedin.com/company/bigcommerce/jobs/">BigCommerce</a></li>
+  <li><a href="https://www.linkedin.com/company/bill/jobs/">BILL</a></li>
+  <li><a href="https://www.linkedin.com/company/bjss/jobs/">BJSS</a></li>
+  <li><a href="https://www.linkedin.com/company/blablacar/jobs/">BlaBlaCar</a></li>
+  <li><a href="https://www.linkedin.com/company/blackrock/jobs/">BlackRock</a></li>
+  <li><a href="https://www.linkedin.com/company/blackstonegroup/jobs/">Blackstone</a></li>
+  <li><a href="https://www.linkedin.com/company/bloomberg/jobs/">Bloomberg</a></li>
+  <li><a href="https://www.linkedin.com/company/bloomreach/jobs/">Bloomreach</a></li>
+  <li><a href="https://www.linkedin.com/company/block-/jobs/">Block</a></li>
+  <li><a href="https://www.linkedin.com/company/blendlabs/jobs/">Blend</a></li>
+  <li><a href="https://www.linkedin.com/company/letsblinkit/jobs/">Blinkit</a></li>
+  <li><a href="https://www.linkedin.com/company/blizzard-entertainment/jobs/">Blizzard Entertainment</a></li>
+  <li><a href="https://www.linkedin.com/company/blue-origin/jobs/">Blue Origin</a></li>
+  <li><a href="https://www.linkedin.com/company/bmw-group/jobs/">BMW Group</a></li>
+  <li><a href="https://www.linkedin.com/company/bny-mellon/jobs/">BNY Mellon</a></li>
+  <li><a href="https://www.linkedin.com/company/boeing/jobs/">Boeing</a></li>
+  <li><a href="https://www.linkedin.com/company/booking.com/jobs/">Booking.com</a></li>
+  <li><a href="https://www.linkedin.com/company/tbc-theboringcompany/jobs/">The Boring Company</a></li>
+  <li><a href="https://www.linkedin.com/company/bose-corporation/jobs/">Bose Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/bosch/jobs/">Bosch</a></li>
+  <li><a href="https://www.linkedin.com/company/boston-consulting-group/jobs/">Boston Consulting Group (BCG)</a></li>
+  <li><a href="https://www.linkedin.com/company/boston-dynamics/jobs/">Boston Dynamics</a></li>
+  <li><a href="https://www.linkedin.com/company/boston-scientific/jobs/">Boston Scientific</a></li>
+  <li><a href="https://www.linkedin.com/company/box/jobs/">Box</a></li>
+  <li><a href="https://www.linkedin.com/company/branch-co/jobs/">Branch</a></li>
+  <li><a href="https://www.linkedin.com/company/braze/jobs/">Braze</a></li>
+  <li><a href="https://www.linkedin.com/company/brex/jobs/">Brex</a></li>
+  <li><a href="https://www.linkedin.com/company/bridgewater-associates/jobs/">Bridgewater Associates</a></li>
+  <li><a href="https://www.linkedin.com/company/bristol-myers-squibb/jobs/">Bristol Myers Squibb</a></li>
+  <li><a href="https://www.linkedin.com/company/brightcom/jobs/">Bright</a></li>
+  <li><a href="https://www.linkedin.com/company/broadcom/jobs/">Broadcom</a></li>
+  <li><a href="https://www.linkedin.com/company/brookhavenlab/jobs/">Brookhaven National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/browserstack/jobs/">BrowserStack</a></li>
+  <li><a href="https://www.linkedin.com/company/bumble/jobs/">Bumble</a></li>
+  <li><a href="https://www.linkedin.com/company/bumbleinc/jobs/">Bumble Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/bytedance/jobs/">Bytedance</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>C companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/cadence-design-systems/jobs/">Cadence Design Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/calm/jobs/">Calm</a></li>
+  <li><a href="https://www.linkedin.com/company/calendly/jobs/">Calendly</a></li>
+  <li><a href="https://www.linkedin.com/company/canonical/jobs/">Canonical</a></li>
+  <li><a href="https://www.linkedin.com/company/canva/jobs/">Canva</a></li>
+  <li><a href="https://www.linkedin.com/company/capgemini/jobs/">Capgemini</a></li>
+  <li><a href="https://www.linkedin.com/company/capital-one/jobs/">Capital One</a></li>
+  <li><a href="https://www.linkedin.com/company/capitalgroup/jobs/">Capital</a></li>
+  <li><a href="https://www.linkedin.com/company/capsule8/jobs/">Capsule</a></li>
+  <li><a href="https://www.linkedin.com/company/cars24/jobs/">CARS24</a></li>
+  <li><a href="https://www.linkedin.com/company/cars-commerce/jobs/">Cars Commerce</a></li>
+  <li><a href="https://www.linkedin.com/company/carmax/jobs/">CarMax</a></li>
+  <li><a href="https://www.linkedin.com/company/cashfree/jobs/">Cashfree Payments</a></li>
+  <li><a href="https://www.linkedin.com/company/cb-insights/jobs/">CB Insights</a></li>
+  <li><a href="https://www.linkedin.com/company/celonis/jobs/">Celonis</a></li>
+  <li><a href="https://www.linkedin.com/company/ceridian/jobs/">Ceridian</a></li>
+  <li><a href="https://www.linkedin.com/company/cermati/jobs/">Cermati.com</a></li>
+  <li><a href="https://www.linkedin.com/company/cern/jobs/">CERN</a></li>
+  <li><a href="https://www.linkedin.com/company/cerner-corporation/jobs/">Cerner Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/cgi/jobs/">CGI</a></li>
+  <li><a href="https://www.linkedin.com/company/chargebee/jobs/">Chargebee</a></li>
+  <li><a href="https://www.linkedin.com/company/chegg-inc-/jobs/">Chegg Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/charles-schwab/jobs/">Charles Schwab</a></li>
+  <li><a href="https://www.linkedin.com/company/chewy-com/jobs/">Chewy</a></li>
+  <li><a href="https://www.linkedin.com/company/chime/jobs/">Chime</a></li>
+  <li><a href="https://www.linkedin.com/company/chubb/jobs/">Chubb</a></li>
+  <li><a href="https://www.linkedin.com/company/ciena/jobs/">Ciena</a></li>
+  <li><a href="https://www.linkedin.com/company/cignahealthcare/jobs/">Cigna Healthcare</a></li>
+  <li><a href="https://www.linkedin.com/company/cisco/jobs/">Cisco</a></li>
+  <li><a href="https://www.linkedin.com/company/cisco-meraki/jobs/">Cisco Meraki</a></li>
+  <li><a href="https://www.linkedin.com/company/citadel-securities/jobs/">Citadel Securities</a></li>
+  <li><a href="https://www.linkedin.com/company/citi/jobs/">Citi</a></li>
+  <li><a href="https://www.linkedin.com/company/clari/jobs/">Clari</a></li>
+  <li><a href="https://www.linkedin.com/company/clever-inc-/jobs/">Clever Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/clickhouseinc/jobs/">ClickHouse</a></li>
+  <li><a href="https://www.linkedin.com/company/clickup-app/jobs/">ClickUp</a></li>
+  <li><a href="https://www.linkedin.com/company/cloudera/jobs/">Cloudera</a></li>
+  <li><a href="https://www.linkedin.com/company/cloudflare/jobs/">Cloudflare</a></li>
+  <li><a href="https://www.linkedin.com/company/cnn/jobs/">CNN</a></li>
+  <li><a href="https://www.linkedin.com/company/cockroach-labs/jobs/">Cockroach Labs</a></li>
+  <li><a href="https://www.linkedin.com/company/the-coca-cola-company/jobs/">Coca-Cola Company</a></li>
+  <li><a href="https://www.linkedin.com/company/coda-platform/jobs/">Coda</a></li>
+  <li><a href="https://www.linkedin.com/company/codecademy/jobs/">Codecademy</a></li>
+  <li><a href="https://www.linkedin.com/company/cognism/jobs/">Cognism</a></li>
+  <li><a href="https://www.linkedin.com/company/cognizant/jobs/">Cognizant</a></li>
+  <li><a href="https://www.linkedin.com/company/coherehealth/jobs/">Cohere Health</a></li>
+  <li><a href="https://www.linkedin.com/company/cohesity/jobs/">Cohesity</a></li>
+  <li><a href="https://www.linkedin.com/company/comcast/jobs/">Comcast</a></li>
+  <li><a href="https://www.linkedin.com/company/concentrix/jobs/">Concentrix</a></li>
+  <li><a href="https://www.linkedin.com/company/costco-wholesale/jobs/">Costco Wholesale</a></li>
+  <li><a href="https://www.linkedin.com/company/coinbase/jobs/">Coinbase</a></li>
+  <li><a href="https://www.linkedin.com/company/cointracker/jobs/">Cointracker</a></li>
+  <li><a href="https://www.linkedin.com/company/concentrix/jobs/">Concentrix</a></li>
+  <li><a href="https://www.linkedin.com/company/confluentinc/jobs/">Confluent</a></li>
+  <li><a href="https://www.linkedin.com/company/continental/jobs/">Continental</a></li>
+  <li><a href="https://www.linkedin.com/company/convoy-inc-/jobs/">Convoy</a></li>
+  <li><a href="https://www.linkedin.com/company/cohere-health/jobs/">Cohere Health</a></li>
+  <li><a href="https://www.linkedin.com/company/coupang/jobs/">Coupang</a></li>
+  <li><a href="https://www.linkedin.com/company/couchbase/jobs/">Couchbase</a></li>
+  <li><a href="https://www.linkedin.com/company/coursera/jobs/">Coursera</a></li>
+  <li><a href="https://www.linkedin.com/company/cox-automotive-inc-/jobs/">Cox Automotive Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/cox-enterprises/jobs/">Cox Enterprises</a></li>
+  <li><a href="https://www.linkedin.com/company/credapp/jobs/">CRED</a></li>
+  <li><a href="https://www.linkedin.com/company/crisil/jobs/">CRISIL Limited</a></li>
+  <li><a href="https://www.linkedin.com/company/criteo/jobs/">Criteo</a></li>
+  <li><a href="https://www.linkedin.com/company/crowdstrike/jobs/">CrowdStrike</a></li>
+  <li><a href="https://www.linkedin.com/company/cruise/jobs/">Cruise</a></li>
+  <li><a href="https://www.linkedin.com/company/cryptocom/jobs/">Crypto.com</a></li>
+  <li><a href="https://www.linkedin.com/company/cvs-health/jobs/">CVS</a></li>
+  <li><a href="https://www.linkedin.com/company/cyence/jobs/">Cyence</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>D companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/dassaultsystemes/jobs/">Dassault Systèmes</a></li>
+  <li><a href="https://www.linkedin.com/company/databricks/jobs/">Databricks</a></li>
+  <li><a href="https://www.linkedin.com/company/datadog/jobs/">Datadog</a></li>
+  <li><a href="https://www.linkedin.com/company/dataminr/jobs/">Dataminr</a></li>
+  <li><a href="https://www.linkedin.com/company/deel/jobs/">Deel</a></li>
+  <li><a href="https://www.linkedin.com/company/deliveroo/jobs/">Deliveroo</a></li>
+  <li><a href="https://www.linkedin.com/company/deloitte/jobs/">Deloitte</a></li>
+  <li><a href="https://www.linkedin.com/company/deloitte-digital/jobs/">Deloitte Digital</a></li>
+  <li><a href="https://www.linkedin.com/company/deutsche-bank/jobs/">Deutsche Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/dell/jobs/">Dell</a></li>
+  <li><a href="https://www.linkedin.com/company/deloitte/jobs/">Deloitte</a></li>
+  <li><a href="https://www.linkedin.com/company/deloitte-digital/jobs/">Deloitte Digital</a></li>
+  <li><a href="https://www.linkedin.com/company/delta-air-lines/jobs/">Delta Air Lines</a></li>
+  <li><a href="https://www.linkedin.com/company/d.-e.-shaw-&amp;-co./jobs/">D. E. Shaw Group</a></li>
+  <li><a href="https://www.linkedin.com/company/d.-e.-shaw-india-private-limited/jobs/">D. E. Shaw India Private Limited</a></li>
+  <li><a href="https://www.linkedin.com/company/developers-inc/jobs/">Devsinc</a></li>
+  <li><a href="https://www.linkedin.com/company/digitalocean/jobs/">DigitalOcean</a></li>
+  <li><a href="https://www.linkedin.com/company/discord/jobs/">Discord</a></li>
+  <li><a href="https://www.linkedin.com/company/dhl/jobs/">DHL</a></li>
+  <li><a href="https://www.linkedin.com/company/deutsche-bank/jobs/">Deutsche Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/docker/jobs/">Docker, Inc</a></li>
+  <li><a href="https://www.linkedin.com/company/doctolib/jobs/">Doctolib</a></li>
+  <li><a href="https://www.linkedin.com/company/docusign/jobs/">DocuSign</a></li>
+  <li><a href="https://www.linkedin.com/company/dolby-laboratories/jobs/">Dolby Laboratories</a></li>
+  <li><a href="https://www.linkedin.com/company/doordash/jobs/">DoorDash</a></li>
+  <li><a href="https://www.linkedin.com/company/doubleverify/jobs/">DoubleVerify</a></li>
+  <li><a href="https://www.linkedin.com/company/doximity/jobs/">Doximity</a></li>
+  <li><a href="https://www.linkedin.com/company/dp-world/jobs/">DP World</a></li>
+  <li><a href="https://www.linkedin.com/company/dropbox/jobs/">Dropbox</a></li>
+  <li><a href="https://www.linkedin.com/company/druva/jobs/">Druva</a></li>
+  <li><a href="https://www.linkedin.com/company/dtcc/jobs/">DTCC</a></li>
+  <li><a href="https://www.linkedin.com/company/duck-duck-go/jobs/">DuckDuckGo</a></li>
+  <li><a href="https://www.linkedin.com/company/duosec/jobs/">Duo Security</a></li>
+  <li><a href="https://www.linkedin.com/company/duolingo/jobs/">Duolingo</a></li>
+  <li><a href="https://www.linkedin.com/company/dxctechnology/jobs/">DXC Technology</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>E companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/e-trade/jobs/">E*TRADE</a></li>
+  <li><a href="https://www.linkedin.com/company/ebay/jobs/">eBay</a></li>
+  <li><a href="https://www.linkedin.com/company/edward-jones/jobs/">Edward Jones</a></li>
+  <li><a href="https://www.linkedin.com/company/edx/jobs/">EdX</a></li>
+  <li><a href="https://www.linkedin.com/company/eightfoldai/jobs/">Eightfold</a></li>
+  <li><a href="https://www.linkedin.com/company/emerson/jobs/">Emerson</a></li>
+  <li><a href="https://www.linkedin.com/company/envoy/jobs/">Envoy</a></li>
+  <li><a href="https://www.linkedin.com/company/elastic-co/jobs/">Elastic</a></li>
+  <li><a href="https://www.linkedin.com/company/electronic-arts/jobs/">Electronic Arts (EA)</a></li>
+  <li><a href="https://www.linkedin.com/company/elevance-health/jobs/">Elevance Health</a></li>
+  <li><a href="https://www.linkedin.com/company/eli-lilly-and-company/jobs/">Eli Lilly and Company</a></li>
+  <li><a href="https://www.linkedin.com/company/endress-hauser-group/jobs/">Endress+Hauser Group</a></li>
+  <li><a href="https://www.linkedin.com/company/epam-anywhere/jobs/">EPAM Anywhere</a></li>
+  <li><a href="https://www.linkedin.com/company/epam-systems/jobs/">EPAM Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/epic1979/jobs/">Epic</a></li>
+  <li><a href="https://www.linkedin.com/company/epic-games/jobs/">Epic Games</a></li>
+  <li><a href="https://www.linkedin.com/company/epirus/jobs/">Epirus</a></li>
+  <li><a href="https://www.linkedin.com/company/ericsson/jobs/">Ericsson</a></li>
+  <li><a href="https://www.linkedin.com/company/esri/jobs/">Esri</a></li>
+  <li><a href="https://www.linkedin.com/company/espn/jobs/">ESPN</a></li>
+  <li><a href="https://www.linkedin.com/company/etech-global-services/jobs/">Etech Global Services</a></li>
+  <li><a href="https://www.linkedin.com/company/etsy/jobs/">Etsy</a></li>
+  <li><a href="https://www.linkedin.com/company/expedia/jobs/">Expedia</a></li>
+  <li><a href="https://www.linkedin.com/company/exponent-jobs/">Exponent</a></li>
+  <li><a href="https://www.linkedin.com/company/extreme-networks/jobs/">Extreme Networks</a></li>
+  <li><a href="https://www.linkedin.com/company/ernstandyoung/jobs/">EY</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>F companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/f5/jobs/">F5</a></li>
+  <li><a href="https://www.linkedin.com/company/facebook/jobs/">Facebook</a></li>
+  <li><a href="https://www.linkedin.com/company/factset/jobs/">FactSet</a></li>
+  <li><a href="https://www.linkedin.com/company/fedex/jobs/">FedEx</a></li>
+  <li><a href="https://www.linkedin.com/company/fanduel/jobs/">FanDuel</a></li>
+  <li><a href="https://www.linkedin.com/company/fanatics-inc-/jobs/">Fanatics</a></li>
+  <li><a href="https://www.linkedin.com/company/federal-express-corporation/jobs/">Federal Express Corporation (FedEx)</a></li>
+  <li><a href="https://www.linkedin.com/company/feedzai/jobs/">Feedzai</a></li>
+  <li><a href="https://www.linkedin.com/company/fidelity-investments/jobs/">Fidelity Investments</a></li>
+  <li><a href="https://www.linkedin.com/company/fifth-third-bank/jobs/">Fifth Third Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/figma/jobs/">Figma</a></li>
+  <li><a href="https://www.linkedin.com/company/fiverr-com/jobs/">Fiverr</a></li>
+  <li><a href="https://www.linkedin.com/company/flatiron-health/jobs/">Flatiron Health</a></li>
+  <li><a href="https://www.linkedin.com/company/flexera/jobs/">Flexera</a></li>
+  <li><a href="https://www.linkedin.com/company/flexport/jobs/">Flexport</a></li>
+  <li><a href="https://www.linkedin.com/company/flipkart/jobs/">Flipkart</a></li>
+  <li><a href="https://www.linkedin.com/company/flutterwave/jobs/">Flutterwave</a></li>
+  <li><a href="https://www.linkedin.com/company/ford-motor-company/jobs/">Ford Motor Company</a></li>
+  <li><a href="https://www.linkedin.com/company/fortinet/jobs/">Fortinet</a></li>
+  <li><a href="https://www.linkedin.com/company/fortive/jobs/">Fortive</a></li>
+  <li><a href="https://www.linkedin.com/company/foursquare/jobs/">Foursquare</a></li>
+  <li><a href="https://www.linkedin.com/company/franklin-templeton/jobs/">Franklin Templeton</a></li>
+  <li><a href="https://www.linkedin.com/company/fractal-analytics/jobs/">Fractal</a></li>
+  <li><a href="https://www.linkedin.com/company/frontfinancial/jobs/">FrontFinancial</a></li>
+  <li><a href="https://www.linkedin.com/company/freightos/jobs/">Freightos</a></li>
+  <li><a href="https://www.linkedin.com/company/freshworks/jobs/">Freshworks</a></li>
+  <li><a href="https://www.linkedin.com/company/friday-health-plans/jobs/">Friday Health Plans</a></li>
+  <li><a href="https://www.linkedin.com/company/fynd-shopsense/jobs/">Fynd (Shopsense Retail Technologies Ltd.)</a></li>
+  <li><a href="https://www.linkedin.com/company/fyusion/jobs/">Fyusion</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>G companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/gameberry-labs/jobs/">Gameberry Labs</a></li>
+  <li><a href="https://www.linkedin.com/company/gamechangermedia/jobs/">GameChanger</a></li>
+  <li><a href="https://www.linkedin.com/company/garmin/jobs/">Garmin</a></li>
+  <li><a href="https://www.linkedin.com/company/ge/jobs/">GE</a></li>
+  <li><a href="https://www.linkedin.com/company/gehealthcare/">GE HealthCare</a></li>
+  <li><a href="https://www.linkedin.com/company/genpact/jobs/">Genpact</a></li>
+  <li><a href="https://www.linkedin.com/company/general-dynamics/jobs/">General Dynamics</a></li>
+  <li><a href="https://www.linkedin.com/company/general-motors/jobs/">General Motors</a></li>
+  <li><a href="https://www.linkedin.com/company/genesys/jobs/">Genesys</a></li>
+  <li><a href="https://www.linkedin.com/company/gladly-inc/jobs/">Gladly</a></li>
+  <li><a href="https://www.linkedin.com/company/globalfoundries/">GlobalFoundries</a></li>
+  <li><a href="https://www.linkedin.com/company/globallogic/jobs/">GlobalLogic</a></li>
+  <li><a href="https://www.linkedin.com/company/github/jobs/">GitHub</a></li>
+  <li><a href="https://www.linkedin.com/company/goldman-sachs/jobs/">Goldman Sachs</a></li>
+  <li><a href="https://www.linkedin.com/company/gong-io/jobs/">Gong</a></li>
+  <li><a href="https://www.linkedin.com/company/goodrx/jobs/">GoodRx</a></li>
+  <li><a href="https://www.linkedin.com/company/google/jobs">Google</a></li>
+  <li><a href="https://www.linkedin.com/company/googledeepmind/jobs/">Google Deepmind</a></li>
+  <li><a href="https://www.linkedin.com/company/google-cloud/jobs">Google Cloud (GCP)</a></li>
+  <li><a href="https://www.linkedin.com/company/gitlab-com/jobs/">gitlab</a></li>
+  <li><a href="https://www.linkedin.com/company/gojek/jobs/">Gojek</a></li>
+  <li><a href="https://www.linkedin.com/company/gopro_3/jobs/">GoPro</a></li>
+  <li><a href="https://www.linkedin.com/company/gordian-software/jobs/">Gordian Software</a></li>
+  <li><a href="https://www.linkedin.com/company/godaddy/jobs/">GoDaddy</a></li>
+  <li><a href="https://www.linkedin.com/company/grafana-labs/jobs/">Grafana Labs</a></li>
+  <li><a href="https://www.linkedin.com/company/grabapp/jobs/">Grab</a></li>
+  <li><a href="https://www.linkedin.com/company/grammarly/jobs/">Grammarly</a></li>
+  <li><a href="https://www.linkedin.com/company/groww.in/jobs/">Groww</a></li>
+  <li><a href="https://www.linkedin.com/company/gsk/jobs/">GSK</a></li>
+  <li><a href="https://www.linkedin.com/company/grubhub/jobs/">Grubhub</a></li>
+  <li><a href="https://www.linkedin.com/company/guardian-life/jobs/">Guardian Life</a></li>
+  <li><a href="https://www.linkedin.com/company/getguru/jobs/">Guru</a></li>
+  <li><a href="https://www.linkedin.com/company/gusto/jobs/">Gusto</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>H companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/hackerearth/jobs/">HackerEarth</a></li>
+  <li><a href="https://www.linkedin.com/company/hashicorp/jobs/">HashiCorp</a></li>
+  <li><a href="https://www.linkedin.com/company/h&amp;m/jobs/">H&amp;M</a></li>
+  <li><a href="https://www.linkedin.com/company/hbo/jobs/">HBO</a></li>
+  <li><a href="https://www.linkedin.com/company/hcltech/jobs/">HCLTech</a></li>
+  <li><a href="https://www.linkedin.com/company/headspace-meditation-limited/jobs/">Headspace</a></li>
+  <li><a href="https://www.linkedin.com/company/hellofresh/jobs/">HelloFresh</a></li>
+  <li><a href="https://www.linkedin.com/company/here/jobs/">HERE Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/hexaware-technologies/jobs/">Hexaware Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/hewlett-packard-enterprise/jobs/">Hewlett Packard Enterprise</a></li>
+  <li><a href="https://www.linkedin.com/company/hilton/jobs/">Hilton</a></li>
+  <li><a href="https://www.linkedin.com/company/hinge-health/jobs/">Hinge Health</a></li>
+  <li><a href="https://www.linkedin.com/company/hireart/jobs/">HireArt</a></li>
+  <li><a href="https://www.linkedin.com/company/hitachienergy/jobs/">Hitachi Energy</a></li>
+  <li><a href="https://www.linkedin.com/company/the-home-depot/jobs/">Home Depot</a></li>
+  <li><a href="https://www.linkedin.com/company/homeaway/jobs/">HomeAway</a></li>
+  <li><a href="https://www.linkedin.com/company/honeywell/jobs/">Honeywell</a></li>
+  <li><a href="https://www.linkedin.com/company/hootsuite/jobs/">Hootsuite</a></li>
+  <li><a href="https://www.linkedin.com/company/hopin/jobs/">Hopin</a></li>
+  <li><a href="https://www.linkedin.com/company/hostinger/jobs/">Hostinger</a></li>
+  <li><a href="https://www.linkedin.com/company/houzz/jobs/">Houzz</a></li>
+  <li><a href="https://www.linkedin.com/company/hp/jobs/">HP</a></li>
+  <li><a href="https://www.linkedin.com/company/hsbc/jobs/">HSBC</a></li>
+  <li><a href="https://www.linkedin.com/company/huawei/jobs/">Huawei</a></li>
+  <li><a href="https://www.linkedin.com/company/hubspot/jobs/">HubSpot</a></li>
+  <li><a href="https://www.linkedin.com/company/hudl/jobs/">Hudl</a></li>
+  <li><a href="https://www.linkedin.com/company/hudson-river-trading/jobs/">Hudson River Trading</a></li>
+  <li><a href="https://www.linkedin.com/company/humana/jobs/">Humana</a></li>
+  <li><a href="https://www.linkedin.com/company/human-care-systems/jobs/">Human Care Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/huge/jobs/">Huge</a></li>
+  <li><a href="https://www.linkedin.com/company/huggingface/jobs/">Hugging Face</a></li>
+  <li><a href="https://www.linkedin.com/company/hulu/jobs/">Hulu</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>I companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/ibm/jobs">IBM</a></li>
+  <li><a href="https://www.linkedin.com/company/icertis/jobs/">Icertis</a></li>
+  <li><a href="https://www.linkedin.com/company/idexx-laboratories/jobs/">IDEXX</a></li>
+  <li><a href="https://www.linkedin.com/company/idfcfirstbank/jobs/">IDFC FIRST Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/ikea/jobs/">IKEA</a></li>
+  <li><a href="https://www.linkedin.com/company/illumina/jobs/">Illumina</a></li>
+  <li><a href="https://www.linkedin.com/company/imc-financial-markets/jobs/">IMC Trading</a></li>
+  <li><a href="https://www.linkedin.com/company/immutable/jobs/">Immutable</a></li>
+  <li><a href="https://www.linkedin.com/company/indeed-com/jobs/">Indeed</a></li>
+  <li><a href="https://www.linkedin.com/company/indiumsoftware/jobs/">Indium Software</a></li>
+  <li><a href="https://www.linkedin.com/company/idp-education-pty-ltd/jobs/">IDP Education Ltd</a></li>
+  <li><a href="https://www.linkedin.com/company/infineon-technologies/jobs/">Infineon Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/infinera/jobs/">Infinera</a></li>
+  <li><a href="https://www.linkedin.com/company/inflectionai/jobs/">Inflection AI</a></li>
+  <li><a href="https://www.linkedin.com/company/infosys/jobs/">Infosys</a></li>
+  <li><a href="https://www.linkedin.com/company/ing/jobs/">ING</a></li>
+  <li><a href="https://www.linkedin.com/company/instacart/jobs/">Instacart</a></li>
+  <li><a href="https://www.linkedin.com/company/intuit/jobs/">Intuit</a></li>
+  <li><a href="https://www.linkedin.com/company/intel-corporation/jobs/">Intel Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/internet-brands/jobs/">Internet Brands</a></li>
+  <li><a href="https://www.linkedin.com/company/intercom/jobs/">Intercom</a></li>
+  <li><a href="https://www.linkedin.com/company/invisionapp/jobs/">InVision</a></li>
+  <li><a href="https://www.linkedin.com/company/invoice2go/jobs/">Invoice2go</a></li>
+  <li><a href="https://www.linkedin.com/company/iqvia/jobs/">IQVIA</a></li>
+  <li><a href="https://www.linkedin.com/company/ixl-learning/jobs/">IXL Learning</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>J companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/jane-street-global/jobs/">Jane Street</a></li>
+  <li><a href="https://www.linkedin.com/company/john-deere/jobs/">John Deere</a></li>
+  <li><a href="https://www.linkedin.com/company/johnson-&amp;-johnson/jobs/">Johnson &amp; Johnson</a></li>
+  <li><a href="https://www.linkedin.com/company/reliance-jio-infocomm-limited/jobs/">Jio</a></li>
+  <li><a href="https://www.linkedin.com/company/jpmorganchase/jobs/">JP Morgan Chase</a></li>
+  <li><a href="https://www.linkedin.com/company/jumia/jobs/">Jumia</a></li>
+  <li><a href="https://www.linkedin.com/company/jump-trading/jobs/">Jump Trading Group</a></li>
+  <li><a href="https://www.linkedin.com/company/juniper-networks/jobs/">Juniper Networks</a></li>
+  <li><a href="https://www.linkedin.com/company/juspay-technologies/jobs/">JUSPAY</a></li>
+  <li><a href="https://www.linkedin.com/company/just-eat-takeaway-com/jobs/">Just Eat Takeaway.com</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>K companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/kayak-com/jobs/">Kayak</a></li>
+  <li><a href="https://www.linkedin.com/company/keysight-technologies/jobs/">Keysight Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/king/jobs/">King</a></li>
+  <li><a href="https://www.linkedin.com/company/klaviyo/jobs/">Klaviyo</a></li>
+  <li><a href="https://www.linkedin.com/company/kpit/jobs/">KPIT</a></li>
+  <li><a href="https://www.linkedin.com/company/kpmg/jobs/">KPMG</a></li>
+  <li><a href="https://www.linkedin.com/company/klacorp/jobs/">KLA</a></li>
+  <li><a href="https://www.linkedin.com/company/klarna/jobs/">Klarna</a></li>
+  <li><a href="https://www.linkedin.com/company/kodiakrobotics/jobs/">Kodiak</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>L companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/l3harris-technologies/jobs/">L3Harris Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/lam-research/jobs/">Lam Research</a></li>
+  <li><a href="https://www.linkedin.com/company/lattice-hq/jobs/">Lattice</a></li>
+  <li><a href="https://www.linkedin.com/company/larsen-&amp;-toubro-limited/jobs/">Larsen &amp; Toubro</a></li>
+  <li><a href="https://www.linkedin.com/company/launchdarkly/jobs/">LaunchDarkly</a></li>
+  <li><a href="https://www.linkedin.com/company/lawrence-livermore-national-laboratory/jobs/">Lawrence Livermore National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/lendingclub/jobs/">LendingClub</a></li>
+  <li><a href="https://www.linkedin.com/company/lexisnexis/jobs/">LexisNexis</a></li>
+  <li><a href="https://www.linkedin.com/company/lg-electronics/jobs/">LG Electronics</a></li>
+  <li><a href="https://www.linkedin.com/company/leidos/jobs/">Leidos</a></li>
+  <li><a href="https://www.linkedin.com/company/lemonade-inc-/jobs/">Lemonade</a></li>
+  <li><a href="https://www.linkedin.com/company/lendingtree/jobs/">LendingTree</a></li>
+  <li><a href="https://www.linkedin.com/company/lenovo/jobs/">Lenovo</a></li>
+  <li><a href="https://www.linkedin.com/company/linkedin/jobs/">LinkedIn</a></li>
+  <li><a href="https://www.linkedin.com/company/lime/jobs/">Lime</a></li>
+  <li><a href="https://www.linkedin.com/company/lionsgate/jobs/">Lionsgate</a></li>
+  <li><a href="https://www.linkedin.com/company/liveramp/jobs/">LiveRamp</a></li>
+  <li><a href="https://www.linkedin.com/company/lockheed-martin/jobs/">Lockheed Martin</a></li>
+  <li><a href="https://www.linkedin.com/company/logitech/jobs/">Logitech</a></li>
+  <li><a href="https://www.linkedin.com/company/lor%C3%A9al/jobs/">L’Oréal</a></li>
+  <li><a href="https://www.linkedin.com/company/los-alamos-national-laboratory/jobs/">Los Alamos National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/lowe's-home-improvement/jobs/">Lowe’s Companies, Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/loomhq/jobs/">Loom</a></li>
+  <li><a href="https://www.linkedin.com/company/london-stock-exchange-group/jobs/">LSEG (London Stock Exchange Group)</a></li>
+  <li><a href="https://www.linkedin.com/company/ltimindtree/jobs/">LTIMindtree</a></li>
+  <li><a href="https://www.linkedin.com/company/lucidmotors/jobs/">Lucid Motors</a></li>
+  <li><a href="https://www.linkedin.com/company/lululemon-athletica/jobs/">Lululemon</a></li>
+  <li><a href="https://www.linkedin.com/company/lumentechnologies/jobs/">Lumen Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/luxoft/jobs/">Luxoft</a></li>
+  <li><a href="https://www.linkedin.com/company/lyft/jobs/">Lyft</a></li>
+  <li><a href="https://www.linkedin.com/company/lyra-health/jobs/">Lyra Health</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>M companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/macquariegroup/jobs/">Macquarie Group</a></li>
+  <li><a href="https://www.linkedin.com/company/makemytrip.com/jobs/">MakeMyTrip</a></li>
+  <li><a href="https://www.linkedin.com/company/marvell/jobs/">Marvell Technology</a></li>
+  <li><a href="https://www.linkedin.com/company/marqeta/jobs/">Marqeta</a></li>
+  <li><a href="https://www.linkedin.com/company/mastercard/jobs/">Mastercard</a></li>
+  <li><a href="https://www.linkedin.com/company/masterclass/jobs/">MasterClass</a></li>
+  <li><a href="https://www.linkedin.com/company/match-group/jobs/">Match Group</a></li>
+  <li><a href="https://www.linkedin.com/company/mcgraw-hill-education/jobs/">McGraw Hill</a></li>
+  <li><a href="https://www.linkedin.com/company/mckinsey/jobs/">McKinsey &amp; Company</a></li>
+  <li><a href="https://www.linkedin.com/company/medallia-inc./jobs/">Medallia</a></li>
+  <li><a href="https://www.linkedin.com/company/mediatek/jobs/">MediaTek</a></li>
+  <li><a href="https://www.linkedin.com/company/media.net/jobs/">Media.net</a></li>
+  <li><a href="https://www.linkedin.com/company/mediamath/jobs/">MediaMath</a></li>
+  <li><a href="https://www.linkedin.com/company/medium-com/jobs/">Medium</a></li>
+  <li><a href="https://www.linkedin.com/company/medtronic/jobs/">Medtronic</a></li>
+  <li><a href="https://www.linkedin.com/company/meesho/jobs/">Meesho</a></li>
+  <li><a href="https://www.linkedin.com/company/mendix/jobs/">Mendix</a></li>
+  <li><a href="https://www.linkedin.com/company/mercedes-benz_ag/jobs/">Mercedes-Benz AG</a></li>
+  <li><a href="https://www.linkedin.com/company/merck/jobs/">Merck</a></li>
+  <li><a href="https://www.linkedin.com/company/meta/jobs/">Meta (Facebook)</a></li>
+  <li><a href="https://www.linkedin.com/company/michael-page/jobs/">Michael Page</a></li>
+  <li><a href="https://www.linkedin.com/company/michelin/jobs/">Michelin</a></li>
+  <li><a href="https://www.linkedin.com/company/microchip-technology/jobs/">Microchip Technology Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/micron-technology/jobs/">Micron Technology</a></li>
+  <li><a href="https://www.linkedin.com/company/microsoft/jobs/">Microsoft</a></li>
+  <li><a href="https://www.linkedin.com/company/microsoft-advertising/jobs/">Microsoft Advertising</a></li>
+  <li><a href="https://www.linkedin.com/company/millennium-partners/jobs/">Millennium</a></li>
+  <li><a href="https://www.linkedin.com/company/mindtickle/jobs/">Mindtickle</a></li>
+  <li><a href="https://www.linkedin.com/company/merl/jobs/">Mitsubishi Electric Research Laboratories</a></li>
+  <li><a href="https://www.linkedin.com/company/mirohq/jobs/">Miro</a></li>
+  <li><a href="https://www.linkedin.com/company/mistralai/jobs/">Mistral AI</a></li>
+  <li><a href="https://www.linkedin.com/company/mixpanel/jobs/">Mixpanel</a></li>
+  <li><a href="https://www.linkedin.com/company/mobikwik/jobs/">Mobikwik</a></li>
+  <li><a href="https://www.linkedin.com/company/moodys-corporation/jobs/">Moody’s Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/the-mom-project/jobs/">Mom Project</a></li>
+  <li><a href="https://www.linkedin.com/company/mondaydotcom/jobs/">Monday</a></li>
+  <li><a href="https://www.linkedin.com/company/mongodb/jobs/">MongoDB</a></li>
+  <li><a href="https://www.linkedin.com/company/monzo-bank/jobs/">Monzo Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/morgan-stanley/jobs/">Morgan Stanley</a></li>
+  <li><a href="https://www.linkedin.com/company/motive-inc/jobs/">Motive</a></li>
+  <li><a href="https://www.linkedin.com/company/mozilla-corporation/jobs/">Mozilla</a></li>
+  <li><a href="https://www.linkedin.com/company/motorola/jobs/">Motorola</a></li>
+  <li><a href="https://www.linkedin.com/company/mphasis/jobs/">Mphasis</a></li>
+  <li><a href="https://www.linkedin.com/company/mrcoopermortgage/jobs/">Mr. Cooper</a></li>
+  <li><a href="https://www.linkedin.com/company/usemultiplier/jobs/">Multiplier</a></li>
+  <li><a href="https://www.linkedin.com/company/myntra/jobs/">Myntra</a></li>
+  <li><a href="https://www.linkedin.com/company/myriad-genetics/jobs/">Myriad</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>N companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/nagarro/jobs/">Nagarro</a></li>
+  <li><a href="https://www.linkedin.com/company/nationwide/jobs/">Nationwide</a></li>
+  <li><a href="https://www.linkedin.com/company/national-instruments/jobs/">NI (National Instruments)</a></li>
+  <li><a href="https://www.linkedin.com/company/nbcuniversal-inc-/jobs/">NBCUniversal</a></li>
+  <li><a href="https://www.linkedin.com/company/ncr-corporation/jobs/">NCR Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/nest-labs/jobs/">Nest</a></li>
+  <li><a href="https://www.linkedin.com/company/nestle-s-a-/jobs/">Nestle</a></li>
+  <li><a href="https://www.linkedin.com/company/netapp/jobs/">NetApp</a></li>
+  <li><a href="https://www.linkedin.com/company/netflix/jobs/">Netflix</a></li>
+  <li><a href="https://www.linkedin.com/company/netsuite/jobs/">NetSuite</a></li>
+  <li><a href="https://www.linkedin.com/company/neuralink/jobs/">Neuralink</a></li>
+  <li><a href="https://www.linkedin.com/company/new-relic-inc-/jobs/">New Relic</a></li>
+  <li><a href="https://www.linkedin.com/company/the-new-york-times/jobs/">New York Times</a></li>
+  <li><a href="https://www.linkedin.com/company/nextdoor/jobs/">Nextdoor</a></li>
+  <li><a href="https://www.linkedin.com/company/niantic/jobs/">Niantic</a></li>
+  <li><a href="https://www.linkedin.com/company/nielsen/jobs/">Nielsen</a></li>
+  <li><a href="https://www.linkedin.com/company/nike/jobs/">Nike</a></li>
+  <li><a href="https://www.linkedin.com/company/nikola-motor-company/jobs/">Nikola Corporation</a></li>
+  <li><a href="https://www.linkedin.com/company/nintendo/jobs/">Nintendo</a></li>
+  <li><a href="https://www.linkedin.com/company/nokia/jobs/">Nokia</a></li>
+  <li><a href="https://www.linkedin.com/company/nordstrom/jobs/">Nordstrom</a></li>
+  <li><a href="https://www.linkedin.com/company/nordsecurity/jobs/">Nord Security </a></li>
+  <li><a href="https://www.linkedin.com/company/nordic-semiconductor/jobs/">Nordic Semiconductor</a></li>
+  <li><a href="https://www.linkedin.com/company/northrop-grumman-corporation/jobs/">Northrop Grumman</a></li>
+  <li><a href="https://www.linkedin.com/company/notionlabs/jobs/">Notion</a></li>
+  <li><a href="https://www.linkedin.com/company/novartis/jobs/">Novartis</a></li>
+  <li><a href="https://www.linkedin.com/company/novo-nordisk/jobs/">Novo Nordisk</a></li>
+  <li><a href="https://www.linkedin.com/company/nttdata/jobs/">NTT DATA</a></li>
+  <li><a href="https://www.linkedin.com/company/nubank/jobs/">Nubank</a></li>
+  <li><a href="https://www.linkedin.com/company/nuro/jobs/">Nuro</a></li>
+  <li><a href="https://www.linkedin.com/company/nutanix/">Nutanix</a></li>
+  <li><a href="https://www.linkedin.com/company/nvidia/jobs/">NVIDIA</a></li>
+  <li><a href="https://www.linkedin.com/company/nxp-semiconductors/jobs/">NXP Semiconductors</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>O companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/oak-ridge-national-laboratory/jobsQ">Oak Ridge National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/oak-street-health/jobs/">Oak Street Health</a></li>
+  <li><a href="https://www.linkedin.com/company/oath/jobs/">Oath</a></li>
+  <li><a href="https://www.linkedin.com/company/observeai/jobs/">Observe.AI</a></li>
+  <li><a href="https://www.linkedin.com/company/oculus/jobs/">Oculus</a></li>
+  <li><a href="https://www.linkedin.com/company/okta-inc-/jobs/">Okta</a></li>
+  <li><a href="https://www.linkedin.com/company/okxofficial/jobs/">OKX</a></li>
+  <li><a href="https://www.linkedin.com/company/olacabs-com/jobs/">Ola</a></li>
+  <li><a href="https://www.linkedin.com/company/olaelectric/jobs/">Ola Electric</a></li>
+  <li><a href="https://www.linkedin.com/company/olx-group/jobs/">OLX</a></li>
+  <li><a href="https://www.linkedin.com/company/opendoor/jobs/">Opendoor</a></li>
+  <li><a href="https://www.linkedin.com/company/opentable/jobs/">Opentable</a></li>
+  <li><a href="https://www.linkedin.com/company/opentext/jobs/">Opentext</a></li>
+  <li><a href="https://www.linkedin.com/company/optiver/jobs/">Optiver</a></li>
+  <li><a href="https://www.linkedin.com/company/optum/jobs/">Optum</a></li>
+  <li><a href="https://www.linkedin.com/jobs/oracle-jobs">Oracle</a></li>
+  <li><a href="https://www.linkedin.com/company/oportun/jobs/">Oportun</a></li>
+  <li><a href="https://www.linkedin.com/company/outreach-saas/jobs/">Outreach</a></li>
+  <li><a href="https://www.linkedin.com/company/outschool/jobs/">Outschool</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>P companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/pacific-northwest-national-laboratory/jobs/">Pacific Northwest National Laboratory</a></li>
+  <li><a href="https://www.linkedin.com/company/palantir-technologies/jobs/">Palantir Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/palo-alto-networks/jobs/">Palo Alto Networks</a></li>
+  <li><a href="https://www.linkedin.com/company/pandora/jobs/">Pandora</a></li>
+  <li><a href="https://www.linkedin.com/company/panorama-education/jobs/">Panorama Education</a></li>
+  <li><a href="https://www.linkedin.com/company/paramountco/jobs/">Paramount</a></li>
+  <li><a href="https://www.linkedin.com/company/parkplus/jobs/">Park+</a></li>
+  <li><a href="https://www.linkedin.com/company/pathmotion/jobs/">Pathmotion</a></li>
+  <li><a href="https://www.linkedin.com/company/paypal/jobs/">PayPal</a></li>
+  <li><a href="https://www.linkedin.com/company/paytm/jobs/">Paytm</a></li>
+  <li><a href="https://www.linkedin.com/company/payu/jobs/">PayU</a></li>
+  <li><a href="https://www.linkedin.com/company/pearson/jobs/">Pearson</a></li>
+  <li><a href="https://www.linkedin.com/company/pegasystems/jobs/">Pegasystems</a></li>
+  <li><a href="https://www.linkedin.com/company/peloton/jobs/">Peloton</a></li>
+  <li><a href="https://www.linkedin.com/company/persistent-systems/jobs/">Persistent Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/pendo-io/jobs/">Pendo</a></li>
+  <li><a href="https://www.linkedin.com/company/pepsico/jobs/">PepsiCo</a></li>
+  <li><a href="https://www.linkedin.com/company/perplexity-ai/jobs/">Perplexity</a></li>
+  <li><a href="https://www.linkedin.com/company/persona-technologies/jobs/">Persona</a></li>
+  <li><a href="https://www.linkedin.com/company/petco-animal-supplies-inc-/jobs/">Petco</a></li>
+  <li><a href="https://www.linkedin.com/company/pfizer/jobs/">Pfizer</a></li>
+  <li><a href="https://www.linkedin.com/company/philips/jobs/">Philips</a></li>
+  <li><a href="https://www.linkedin.com/company/phonepe-internet/jobs/">PhonePe</a></li>
+  <li><a href="https://www.linkedin.com/company/photon-interactive/jobs/">Photon</a></li>
+  <li><a href="https://www.linkedin.com/company/pied-piper/jobs/">Pied Piper</a></li>
+  <li><a href="https://www.linkedin.com/company/pimco/jobs/">PIMCO</a></li>
+  <li><a href="https://www.linkedin.com/company/pinelabs/jobs/">Pine Labs</a></li>
+  <li><a href="https://www.linkedin.com/company/pinecone-io/jobs/">Pinecone</a></li>
+  <li><a href="https://www.linkedin.com/company/pinterest/jobs/">Pinterest</a></li>
+  <li><a href="https://www.linkedin.com/company/plaid-/jobs/">Plaid</a></li>
+  <li><a href="https://www.linkedin.com/company/point72-asset-management-l-p-/jobs/">Point72</a></li>
+  <li><a href="https://www.linkedin.com/company/postman-platform/jobs/">Postman</a></li>
+  <li><a href="https://www.linkedin.com/company/prezi/jobs/">Prezi</a></li>
+  <li><a href="https://www.linkedin.com/company/pwc/jobs/">PricewaterhouseCoopers</a></li>
+  <li><a href="https://www.linkedin.com/company/primevideoamazonstudios/jobs/">Prime Video &amp; Amazon MGM Studios</a></li>
+  <li><a href="https://www.linkedin.com/company/procter-and-gamble/jobs/">Procter &amp; Gamble</a></li>
+  <li><a href="https://www.linkedin.com/company/publicissapient/jobs/">Publicis Sapient</a></li>
+  <li><a href="https://www.linkedin.com/company/pubmatic/jobs/">PubMatic</a></li>
+  <li><a href="https://www.linkedin.com/company/pure-storage/jobs/">Pure Storage</a></li>
+  <li><a href="https://www.linkedin.com/company/pwc/jobs/">PwC</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>Q companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/qualcomm/jobs/">Qualcomm</a></li>
+  <li><a href="https://www.linkedin.com/company/qualtrics/jobs/">Qualtrics</a></li>
+  <li><a href="https://www.linkedin.com/company/quora/jobs/">Quora</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>R companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/rackspace/jobs/">Rackspace Technology</a></li>
+  <li><a href="https://www.linkedin.com/company/rakuten/jobs/">Rakuten</a></li>
+  <li><a href="https://www.linkedin.com/company/rally-health/jobs/">Rally Health</a></li>
+  <li><a href="https://www.linkedin.com/company/ramp/jobs/">Ramp</a></li>
+  <li><a href="https://www.linkedin.com/company/rappi/jobs/">Rappi</a></li>
+  <li><a href="https://www.linkedin.com/company/raymond-james-financial-inc-/jobs/">Raymond James</a></li>
+  <li><a href="https://www.linkedin.com/company/raytheon/jobs/">Raytheon</a></li>
+  <li><a href="https://www.linkedin.com/company/razer/jobs/">Razer Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/razorpay/jobs/">Razorpay</a></li>
+  <li><a href="https://www.linkedin.com/company/rea-group/jobs/">REA Group</a></li>
+  <li><a href="https://www.linkedin.com/company/realself/jobs/">RealSelf</a></li>
+  <li><a href="https://www.linkedin.com/company/redbubble/jobs/">Redbubble</a></li>
+  <li><a href="https://www.linkedin.com/company/reddit/jobs/">Reddit</a></li>
+  <li><a href="https://www.linkedin.com/company/redfin/jobs/">Redfin</a></li>
+  <li><a href="https://www.linkedin.com/company/red-hat/jobs/">Red Hat</a></li>
+  <li><a href="https://www.linkedin.com/company/redisinc/jobs/">Redis</a></li>
+  <li><a href="https://www.linkedin.com/company/relativity/jobs/">Relativity Space</a></li>
+  <li><a href="https://www.linkedin.com/company/reliance-retail/jobs/">Reliance Retail</a></li>
+  <li><a href="https://www.linkedin.com/company/remitly/jobs/">Remitly</a></li>
+  <li><a href="https://www.linkedin.com/company/remote.com/jobs/">Remote</a></li>
+  <li><a href="https://www.linkedin.com/company/return-path/jobs/">Return Path</a></li>
+  <li><a href="https://www.linkedin.com/company/revolut/jobs/">Revolut</a></li>
+  <li><a href="https://www.linkedin.com/company/riot-games/jobs/">Riot Games</a></li>
+  <li><a href="https://www.linkedin.com/company/rivian/jobs/">Rivian</a></li>
+  <li><a href="https://www.linkedin.com/company/rippling/jobs/">Rippling</a></li>
+  <li><a href="https://www.linkedin.com/company/ripple-labs/jobs/">Ripple</a></li>
+  <li><a href="https://www.linkedin.com/company/robert-half-international/jobs/">Robert Half</a></li>
+  <li><a href="https://www.linkedin.com/company/robinhood/jobs/">Robinhood</a></li>
+  <li><a href="https://www.linkedin.com/company/roblox/jobs/">Roblox</a></li>
+  <li><a href="https://www.linkedin.com/company/rockstar-games/jobs/">Rockstar games</a></li>
+  <li><a href="https://www.linkedin.com/company/rockwell-automation/jobs/">Rockwell Automation</a></li>
+  <li><a href="https://www.linkedin.com/company/rohde-schwarz/jobs/">Rohde &amp; Schwarz</a></li>
+  <li><a href="https://www.linkedin.com/company/rokt/jobs/">Rokt</a></li>
+  <li><a href="https://www.linkedin.com/company/rover/jobs/">Rover</a></li>
+  <li><a href="https://www.linkedin.com/company/rtx/jobs/">RTX</a></li>
+  <li><a href="https://www.linkedin.com/company/rubrik-inc/jobs/">Rubrik</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>S companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/s&amp;p-global/jobs/">S&amp;P Global</a></li>
+  <li><a href="https://www.linkedin.com/company/saks-fifth-avenue/jobs/">Saks Fifth Avenue</a></li>
+  <li><a href="https://www.linkedin.com/company/salesforce/jobs/">Salesforce</a></li>
+  <li><a href="https://www.linkedin.com/company/salesforce-marketing-cloud/jobs/">Salesforce Marketing Cloud</a></li>
+  <li><a href="https://www.linkedin.com/company/salesloft/jobs/">Salesloft</a></li>
+  <li><a href="https://www.linkedin.com/company/sap/jobs/">SAP</a></li>
+  <li><a href="https://www.linkedin.com/company/samsung-electronics/jobs/">Samsung</a></li>
+  <li><a href="https://www.linkedin.com/company/samsung-next/jobs/">Samsung NEXT</a></li>
+  <li><a href="https://www.linkedin.com/company/samsara/jobs/">Samsara</a></li>
+  <li><a href="https://www.linkedin.com/company/sandia-national-laboratories/jobs/">Sandia National Laboratories</a></li>
+  <li><a href="https://www.linkedin.com/company/sanofi/jobs/">Sanofi</a></li>
+  <li><a href="https://www.linkedin.com/company/seagate-technology/jobs/">Seagate Technology</a></li>
+  <li><a href="https://www.linkedin.com/company/sentinelone/jobs/">SentinelOne</a></li>
+  <li><a href="https://www.linkedin.com/company/scribe-7/jobs/">Scribe</a></li>
+  <li><a href="https://www.linkedin.com/company/scale-ai/jobs/">Scale AI</a></li>
+  <li><a href="https://www.linkedin.com/company/scalar-decisions/jobs/">Scalar</a></li>
+  <li><a href="https://www.linkedin.com/company/schlumberger/jobs/">Schlumberger</a></li>
+  <li><a href="https://www.linkedin.com/company/schneider-electric/jobs/">Schneider Electric</a></li>
+  <li><a href="https://www.linkedin.com/company/thescore/jobs/">Score</a></li>
+  <li><a href="https://www.linkedin.com/company/servicenow/jobs/">Service Now</a></li>
+  <li><a href="https://www.linkedin.com/company/sentinelone/jobs/">SentinelOne</a></li>
+  <li><a href="https://www.linkedin.com/company/getsentry/jobs/">Sentry</a></li>
+  <li><a href="https://www.linkedin.com/company/sephora/jobs/">Sephora</a></li>
+  <li><a href="https://www.linkedin.com/company/servicenow/jobs/">ServiceNow</a></li>
+  <li><a href="https://www.linkedin.com/company/servicetitan/jobs/">ServiceTitan</a></li>
+  <li><a href="https://www.linkedin.com/company/shazam-entertainment-limited/jobs/">Shazam</a></li>
+  <li><a href="https://www.linkedin.com/company/shopify/jobs/">Shopify</a></li>
+  <li><a href="https://www.linkedin.com/company/shield-ai/jobs/">Shield AI</a></li>
+  <li><a href="https://www.linkedin.com/company/shopee/jobs/">Shopee</a></li>
+  <li><a href="https://www.linkedin.com/company/siemens/jobs/">Siemens</a></li>
+  <li><a href="https://www.linkedin.com/company/siemens-healthineers/jobs/">Siemens Healthineers</a></li>
+  <li><a href="https://www.linkedin.com/company/signifyhealth/jobs/">Signify Health</a></li>
+  <li><a href="https://www.linkedin.com/company/singlestore/jobs/">SingleStore</a></li>
+  <li><a href="https://www.linkedin.com/company/siliconlabs/jobs/">Silicon Labs</a></li>
+  <li><a href="https://www.linkedin.com/company/silicon-valley-bank/jobs/">Silicon Valley Bank</a></li>
+  <li><a href="https://www.linkedin.com/company/siriusxm/jobs/">SiriusXM</a></li>
+  <li><a href="https://www.linkedin.com/company/skillsoft/jobs/">Skillsoft</a></li>
+  <li><a href="https://www.linkedin.com/company/skydio/jobs/">Skydio</a></li>
+  <li><a href="https://www.linkedin.com/company/skyscanner/jobs/">Skyscanner</a></li>
+  <li><a href="https://www.linkedin.com/company/slack/jobs/">Slack</a></li>
+  <li><a href="https://www.linkedin.com/company/slalom-consulting/jobs/">Slalom</a></li>
+  <li><a href="https://www.linkedin.com/company/slbglobal/jobs/">SLB</a></li>
+  <li><a href="https://www.linkedin.com/company/snorkel-ai/jobs/">Snorkel AI</a></li>
+  <li><a href="https://www.linkedin.com/company/snowflake-computing/jobs/">Snowflake</a></li>
+  <li><a href="https://www.linkedin.com/company/snap-inc/jobs/">Snap</a></li>
+  <li><a href="https://www.linkedin.com/company/sharechat/jobs/">ShareChat</a></li>
+  <li><a href="https://www.linkedin.com/company/shopify/jobs/">Shopify</a></li>
+  <li><a href="https://www.linkedin.com/company/sofi/jobs/">SoFi</a></li>
+  <li><a href="https://www.linkedin.com/company/soprasteria/jobs/">Sopra Steria</a></li>
+  <li><a href="https://www.linkedin.com/company/sony/jobs/">Sony</a></li>
+  <li><a href="https://www.linkedin.com/company/sony-interactive-entertainment-llc/jobs/">Sony Interactive Entertainment</a></li>
+  <li><a href="https://www.linkedin.com/company/soundcloud/jobs/">SoundCloud</a></li>
+  <li><a href="https://www.linkedin.com/company/soundhound-inc-/jobs/">SoundHound</a></li>
+  <li><a href="https://www.linkedin.com/company/spacex/jobs/">SpaceX</a></li>
+  <li><a href="https://www.linkedin.com/company/spotify/jobs">Spotify</a></li>
+  <li><a href="https://www.linkedin.com/company/splunk/jobs/">Splunk</a></li>
+  <li><a href="https://www.linkedin.com/company/spring-health/jobs/">Spring Health</a></li>
+  <li><a href="https://www.linkedin.com/company/square/jobs/">Square</a></li>
+  <li><a href="https://www.linkedin.com/company/squarespace/jobs/">Squarespace</a></li>
+  <li><a href="https://www.linkedin.com/company/squarepoint-capital/jobs/">Squarepoint Capital</a></li>
+  <li><a href="https://www.linkedin.com/company/susquehanna-international-group-llp-sig/jobs/">Susquehanna International Group, LLP (SIG)</a></li>
+  <li><a href="https://www.linkedin.com/company/sumo-logic/jobs/">Sumo Logic</a></li>
+  <li><a href="https://www.linkedin.com/company/sunrun/jobs/">Sunrun</a></li>
+  <li><a href="https://www.linkedin.com/company/supercell/jobs/">Supercell</a></li>
+  <li><a href="https://www.linkedin.com/company/surveymonkey/jobs/">SurveyMonkey</a></li>
+  <li><a href="https://www.linkedin.com/company/surveysparrow/jobs/">Surveysparrow</a></li>
+  <li><a href="https://www.linkedin.com/company/ss-c-technologies/jobs/">SS&amp;C Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/stability-ai/jobs/">Stability AI</a></li>
+  <li><a href="https://www.linkedin.com/company/state_farm/jobs/">State Farm</a></li>
+  <li><a href="https://www.linkedin.com/company/state-street/jobs/">State Street</a></li>
+  <li><a href="https://www.linkedin.com/company/stmicroelectronics/jobs/">STMicroelectronics</a></li>
+  <li><a href="https://www.linkedin.com/company/sticker-giant/jobs/">StickerGiant</a></li>
+  <li><a href="https://www.linkedin.com/company/strava-inc./jobs/">Strava</a></li>
+  <li><a href="https://www.linkedin.com/company/stripe/jobs/">Stripe</a></li>
+  <li><a href="https://www.linkedin.com/company/stryker/jobs/">Stryker</a></li>
+  <li><a href="https://www.linkedin.com/company/swiggy/jobs/">Swiggy</a></li>
+  <li><a href="https://www.linkedin.com/company/symantec/jobs/">Symantec</a></li>
+  <li><a href="https://www.linkedin.com/company/synopsys/jobs/">Synopsys</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>T companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/t-mobile/jobs/">T-Mobile</a></li>
+  <li><a href="https://www.linkedin.com/company/tata-consultancy-services/jobs/">Tata Consultancy Services</a></li>
+  <li><a href="https://www.linkedin.com/company/talkdesk/jobs/">Talkdesk</a></li>
+  <li><a href="https://www.linkedin.com/company/target/jobs/">Target</a></li>
+  <li><a href="https://www.linkedin.com/company/taskrabbit/jobs/">Taskrabbit</a></li>
+  <li><a href="https://www.linkedin.com/company/tencentglobal/jobs/">Tencent</a></li>
+  <li><a href="https://www.linkedin.com/company/teads/jobs/">Teads</a></li>
+  <li><a href="https://www.linkedin.com/company/tech-mahindra/jobs/">Tech Mahindra</a></li>
+  <li><a href="https://www.linkedin.com/company/tekion/jobs/">ekion Corp</a></li>
+  <li><a href="https://linkedin.com/company/teksystems/jobs/">TEKsystems</a></li>
+  <li><a href="https://www.linkedin.com/company/teleperformance/jobs/">Teleperformance</a></li>
+  <li><a href="https://www.linkedin.com/company/teladoc-health/jobs/">Teladoc Health</a></li>
+  <li><a href="https://www.linkedin.com/company/-tesco/jobs/">Tesco</a></li>
+  <li><a href="https://www.linkedin.com/company/tesla-motors/jobs/">Tesla</a></li>
+  <li><a href="https://www.linkedin.com/company/texas-instruments/jobs/">Texas Instruments</a></li>
+  <li><a href="https://www.linkedin.com/company/thermo-fisher-scientific/jobs/">Thermo Fisher Scientific</a></li>
+  <li><a href="https://www.linkedin.com/company/thomson-reuters/jobs/">Thomson Reuters</a></li>
+  <li><a href="https://www.linkedin.com/company/thoughtspot/jobs/">ThoughtSpot</a></li>
+  <li><a href="https://www.linkedin.com/company/thoughtworks/jobs/">Thoughtworks</a></li>
+  <li><a href="https://www.linkedin.com/company/thumbtack-inc./jobs/">Thumbtack</a></li>
+  <li><a href="https://www.linkedin.com/company/tiger-analytics/jobs/">Tiger Analytics</a></li>
+  <li><a href="https://www.linkedin.com/company/tiktok/jobs/">TikTok</a></li>
+  <li><a href="https://www.linkedin.com/company/tinder-incorporated/jobs/">Tinder</a></li>
+  <li><a href="https://www.linkedin.com/company/toast/jobs/">Toast</a></li>
+  <li><a href="https://www.linkedin.com/company/tomtom/jobs/">TomTom</a></li>
+  <li><a href="https://www.linkedin.com/company/tonal-/jobs/">Tonal</a></li>
+  <li><a href="https://www.linkedin.com/company/toptal/jobs/">Toptal</a></li>
+  <li><a href="https://www.linkedin.com/company/tower-research-capital/jobs/">Tower Research Capital</a></li>
+  <li><a href="https://www.linkedin.com/company/toyota/jobs/">Toyota</a></li>
+  <li><a href="https://www.linkedin.com/company/the-trade-desk/jobs/">Trade Desk</a></li>
+  <li><a href="https://www.linkedin.com/company/tradingview/jobs/">TradingView</a></li>
+  <li><a href="https://www.linkedin.com/company/travelers/jobs/">Travelers</a></li>
+  <li><a href="https://www.linkedin.com/company/traveloka/jobs/">Traveloka</a></li>
+  <li><a href="https://www.linkedin.com/company/travelperk/jobs/">TravelPerk</a></li>
+  <li><a href="https://www.linkedin.com/company/tripactions/jobs/">TripActions</a></li>
+  <li><a href="https://www.linkedin.com/company/tripadvisor/jobs/">TripAdvisor</a></li>
+  <li><a href="https://www.linkedin.com/company/trivagonv/jobs/">trivago</a></li>
+  <li><a href="https://www.linkedin.com/company/truecar-inc-/jobs/">TrueCar, Inc.</a></li>
+  <li><a href="https://www.linkedin.com/company/tsmc/jobs/">TSMC</a></li>
+  <li><a href="https://www.linkedin.com/company/twilio/jobs/">Twilio</a></li>
+  <li><a href="https://www.linkedin.com/company/twitch-tv/jobs/">Twitch</a></li>
+  <li><a href="https://www.linkedin.com/company/twitter/jobs/">Twitter</a></li>
+  <li><a href="https://www.linkedin.com/company/two-sigma-investments/jobs/">Two Sigma</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>U companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/uber-com/jobs/">Uber</a></li>
+  <li><a href="https://www.linkedin.com/company/ubisoft/jobs/">Ubisoft</a></li>
+  <li><a href="https://www.linkedin.com/company/ulta/jobs/">Ulta Beauty</a></li>
+  <li><a href="https://www.linkedin.com/company/ultimate-software/jobs/">Ultimate Software</a></li>
+  <li><a href="https://www.linkedin.com/company/uipath/jobs/">UiPath</a></li>
+  <li><a href="https://www.linkedin.com/company/united-airlines/jobs/">United Airlines</a></li>
+  <li><a href="https://www.linkedin.com/company/unisys/jobs/">Unisys</a></li>
+  <li><a href="https://www.linkedin.com/company/ups/jobs/">UPS</a></li>
+  <li><a href="https://www.linkedin.com/company/upstox/jobs/">Upstox</a></li>
+  <li><a href="https://www.linkedin.com/company/upwork/jobs/">Upwork</a></li>
+  <li><a href="https://www.linkedin.com/company/usaa/jobs/">USAA</a></li>
+  <li><a href="https://www.linkedin.com/company/us-bank/jobs/">U.S. Bank</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>V companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/vanguard/jobs/">Vanguard</a></li>
+  <li><a href="https://www.linkedin.com/company/veeva-systems/jobs/">Veeva Systems</a></li>
+  <li><a href="https://www.linkedin.com/company/vena-solutions/jobs/">Vena Solutions</a></li>
+  <li><a href="https://www.linkedin.com/company/venmo/jobs/">Venmo</a></li>
+  <li><a href="https://www.linkedin.com/company/verizon/jobs/">Verizon</a></li>
+  <li><a href="https://www.linkedin.com/company/verkada/jobs/">Verkada</a></li>
+  <li><a href="https://www.linkedin.com/company/vmware/jobs/">VMware</a></li>
+  <li><a href="https://www.linkedin.com/company/viasat-inc/jobs/">Viasat</a></li>
+  <li><a href="https://www.linkedin.com/company/vimeo/jobs/">Vimeo</a></li>
+  <li><a href="https://www.linkedin.com/company/vinted/jobs/">Vinted</a></li>
+  <li><a href="https://www.linkedin.com/company/virtusa/jobs/">Virtusa</a></li>
+  <li><a href="https://www.linkedin.com/company/visa/jobs/">Visa</a></li>
+  <li><a href="https://www.linkedin.com/company/vivino/jobs/">Vivino</a></li>
+  <li><a href="https://www.linkedin.com/company/vivint/jobs/">Vivint</a></li>
+  <li><a href="https://www.linkedin.com/company/volvo-group/jobs/">Volvo Group</a></li>
+  <li><a href="https://www.linkedin.com/company/vroom/jobs/">Vroom</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>W companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/walgreens/jobs/">Walgreens</a></li>
+  <li><a href="https://www.linkedin.com/company/the-walt-disney-company/jobs/">Walt Disney Company</a></li>
+  <li><a href="https://www.linkedin.com/company/walmart/jobs/">Walmart</a></li>
+  <li><a href="https://www.linkedin.com/company/walmartglobaltechindia/jobs/">Walmart Global Tech India</a></li>
+  <li><a href="https://www.linkedin.com/company/warby-parker/jobs/">Warby Parker</a></li>
+  <li><a href="https://www.linkedin.com/company/warner-bros-discovery/jobs/">Warner Bros. Discovery</a></li>
+  <li><a href="https://www.linkedin.com/company/wayfair/jobs/">Wayfair</a></li>
+  <li><a href="https://www.linkedin.com/company/waymo/jobs/">Waymo</a></li>
+  <li><a href="https://www.linkedin.com/company/wealthfront/jobs/">Wealthfront</a></li>
+  <li><a href="https://www.linkedin.com/company/getweave/jobs/">Weave</a></li>
+  <li><a href="https://www.linkedin.com/company/webflow-inc-/jobs/">Webflow</a></li>
+  <li><a href="https://www.linkedin.com/company/wellsfargo/jobs/">Wells Fargo</a></li>
+  <li><a href="https://www.linkedin.com/company/western-digital/jobs/">Western Digital</a></li>
+  <li><a href="https://www.linkedin.com/company/wework/jobs/">WeWork</a></li>
+  <li><a href="https://www.linkedin.com/company/wexinc/jobs/">WEX</a></li>
+  <li><a href="https://www.linkedin.com/company/whatfix/jobs/">Whatfix</a></li>
+  <li><a href="https://www.linkedin.com/company/whatnot-inc/jobs/">Whatnot</a></li>
+  <li><a href="https://www.linkedin.com/company/whatsapp/jobs/">WhatsApp</a></li>
+  <li><a href="https://www.linkedin.com/company/wipro/jobs/">Wipro</a></li>
+  <li><a href="https://www.linkedin.com/company/wiseaccount/jobs/">Wise</a></li>
+  <li><a href="https://www.linkedin.com/company/wish/jobs/">Wish</a></li>
+  <li><a href="https://www.linkedin.com/company/wolfram-research/jobs/">Wolfram Research</a></li>
+  <li><a href="https://www.linkedin.com/company/workday/jobs/">Workday</a></li>
+  <li><a href="https://www.linkedin.com/company/worldwide-express/jobs/">Worldwide Express</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>X companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/x/jobs/">X, the moonshot factory</a></li>
+  <li><a href="https://www.linkedin.com/company/xilinx/jobs/">Xilinx</a></li>
+  <li><a href="https://www.linkedin.com/company/xiaomi/jobs/">Xiaomi</a></li>
+  <li><a href="https://www.linkedin.com/company/xoriant/jobs/">Xoriant</a></li>
+  <li><a href="https://www.linkedin.com/company/xiaopeng-motors/jobs/">XPENG</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>Y companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/yahoo/jobs/">Yahoo</a></li>
+  <li><a href="https://www.linkedin.com/company/yandex/jobs/">Yandex</a></li>
+  <li><a href="https://www.linkedin.com/company/yext/jobs/">Yext</a></li>
+  <li><a href="https://www.linkedin.com/company/y-combinator/jobs/">Y Combinator</a></li>
+  <li><a href="https://www.linkedin.com/company/yelp/jobs/">Yelp</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h4>Z companies</h4>
+
+<ul>
+  <li><a href="https://www.linkedin.com/company/zalando/jobs/">Zalando</a></li>
+  <li><a href="https://www.linkedin.com/company/zapier/jobs/">Zapier</a></li>
+  <li><a href="https://www.linkedin.com/company/zappos/jobs/">Zappos</a></li>
+  <li><a href="https://www.linkedin.com/company/zenefits/jobs/">Zenefits</a></li>
+  <li><a href="https://www.linkedin.com/company/zendesk/jobs/">Zendesk</a></li>
+  <li><a href="https://www.linkedin.com/company/zenoti/jobs/">Zenoti</a></li>
+  <li><a href="https://www.linkedin.com/company/zensar/jobs/">Zensar Technologies</a></li>
+  <li><a href="https://www.linkedin.com/company/zeta-global/jobs/">Zeta Global</a></li>
+  <li><a href="https://www.linkedin.com/company/zetasuite/jobs/">Zeta</a></li>
+  <li><a href="https://www.linkedin.com/company/zillow/jobs/">Zillow</a></li>
+  <li><a href="https://www.linkedin.com/company/zipline/jobs/">Zipline</a></li>
+  <li><a href="https://www.linkedin.com/company/zoetis/jobs/">Zoetis</a></li>
+  <li><a href="https://www.linkedin.com/company/zoho/jobs/">Zoho</a></li>
+  <li><a href="https://www.linkedin.com/company/zoom-video-communications/jobs/">Zoom</a></li>
+  <li><a href="https://www.linkedin.com/company/zoominfo/jobs/">ZoomInfo</a></li>
+  <li><a href="https://www.linkedin.com/company/zoox-inc/jobs/">Zoox</a></li>
+  <li><a href="https://www.linkedin.com/company/zomato/jobs/">Zomato</a></li>
+  <li><a href="https://www.linkedin.com/company/zs-associates/jobs/">ZS</a></li>
+  <li><a href="https://www.linkedin.com/company/zscaler/jobs/">Zscaler</a></li>
+  <li><a href="https://www.linkedin.com/company/zynga/jobs/">Zynga</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<h2>🎓University-wise</h2>
+
+<p>US</p>
+
+<ul>
+  <li><a href="https://www.linkedin.com/school/mit/jobs/">Massachusetts Institute of Technology (MIT)</a></li>
+  <li><a href="https://www.linkedin.com/school/harvard-university/jobs/">Harvard University</a></li>
+  <li><a href="https://www.linkedin.com/school/stanford-university/jobs/">Stanford University</a></li>
+  <li><a href="https://www.linkedin.com/school/california-institute-of-technology/jobs/">California Institute of Technology (Caltech)</a></li>
+  <li><a href="https://www.linkedin.com/school/cornell-university/jobs/">Cornell University</a></li>
+  <li><a href="https://www.linkedin.com/school/uc-berkeley/jobs/">University of California, Berkeley</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-michigan/jobs/">University of Michigan</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-washington/jobs/">University of Washington</a></li>
+  <li><a href="https://www.linkedin.com/school/columbia-university/jobs/">Columbia University in the City of New York</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-pennsylvania/jobs/">University of Pennsylvania</a></li>
+  <li><a href="https://www.linkedin.com/school/yale-university/jobs/">Yale University</a></li>
+  <li><a href="https://www.linkedin.com/school/uwmadison/jobs/">University of Wisconsin-Madison</a></li>
+  <li><a href="https://www.linkedin.com/school/ucla/jobs/">University of California, Los Angeles (UCLA)</a></li>
+  <li><a href="https://www.linkedin.com/school/theuniversityoftexasataustin-/jobs/">The University of Texas at Austin</a></li>
+  <li><a href="https://www.linkedin.com/school/princeton-university/jobs/">Princeton University</a></li>
+  <li><a href="https://www.linkedin.com/school/purdue-university/jobs/">Purdue University</a></li>
+  <li><a href="https://www.linkedin.com/school/uchicago/jobs/">University of Chicago</a></li>
+  <li><a href="https://www.linkedin.com/school/new-york-university/jobs/">New York University (NYU)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-minnesota/jobs/">University of Minnesota</a></li>
+  <li><a href="https://www.linkedin.com/school/johns-hopkins-university/jobs/">Johns Hopkins University</a></li>
+  <li><a href="https://www.linkedin.com/school/ucsandiego/jobs/">University of California, San Diego (UCSD)</a></li>
+  <li><a href="https://www.linkedin.com/school/carnegie-mellon-university/jobs/">Carnegie Mellon University</a></li>
+  <li><a href="https://www.linkedin.com/school/michigan-state-university/jobs/">Michigan State University</a></li>
+  <li><a href="https://www.linkedin.com/school/penn-state-university/jobs/">Penn State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-southern-california/jobs/">University of Southern California (USC)</a></li>
+  <li><a href="https://www.linkedin.com/school/uc-davis/jobs/">University of California, Davis</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-north-carolina-at-chapel-hill/jobs/">University of North Carolina at Chapel Hill (UNC)</a></li>
+  <li><a href="https://www.linkedin.com/school/duke-university/jobs/">Duke University</a></li>
+  <li><a href="https://www.linkedin.com/school/uflorida/jobs/">University of Florida</a></li>
+  <li><a href="https://www.linkedin.com/school/rutgersu/jobs/">Rutgers University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-illinois-at-urbana-champaign/jobs/">University of Illinois Urbana-Champaign</a></li>
+  <li><a href="https://www.linkedin.com/school/arizona-state-university/jobs/">Arizona State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-maryland/">University of Maryland College Park</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-virginia/jobs/">University of Virginia</a></li>
+  <li><a href="https://www.linkedin.com/school/uarizona/jobs/">University of Arizona</a></li>
+  <li><a href="https://www.linkedin.com/school/cuboulder/jobs/">University of Colorado Boulder</a></li>
+  <li><a href="https://www.linkedin.com/school/texas-a&amp;m-university/jobs/">Texas A&amp;M University</a></li>
+  <li><a href="https://www.linkedin.com/school/northwestern-university/jobs/">Northwestern University</a></li>
+  <li><a href="https://www.linkedin.com/school/the-ohio-state-university/jobs/">The Ohio State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-california-irvine/jobs/">University of California, Irvine</a></li>
+  <li><a href="https://www.linkedin.com/school/boston-university/jobs/">Boston University</a></li>
+  <li><a href="https://www.linkedin.com/school/indiana-university-bloomington/jobs/">Indiana University Bloomington</a></li>
+  <li><a href="https://www.linkedin.com/school/north-carolina-state-university/jobs/">North Carolina State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-utah/jobs/">The University of Utah</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-pittsburgh/jobs/">University of Pittsburgh</a></li>
+  <li><a href="https://www.linkedin.com/school/tufts-university/jobs/">Tufts University</a></li>
+  <li><a href="https://www.linkedin.com/school/georgetown-university/jobs/">Georgetown University</a></li>
+  <li><a href="https://www.linkedin.com/school/washington-university-in-st-louis/jobs/">Washington University in St. Louis</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-nebraska-lincoln/jobs/">University of Nebraska-Lincoln</a></li>
+  <li><a href="https://www.linkedin.com/school/virginia-tech/jobs/">Virginia Polytechnic Institute and State University (Virginia Tech)</a></li>
+  <li><a href="https://www.linkedin.com/school/ucsantabarbara/jobs/">University of California, Santa Barbara</a></li>
+  <li><a href="https://www.linkedin.com/school/georgia-institute-of-technology/jobs/">Georgia Institute of Technology (Georgia Tech)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-rochester/jobs/">University of Rochester</a></li>
+  <li><a href="https://www.linkedin.com/school/brown-university/jobs/">Brown University</a></li>
+  <li><a href="https://www.linkedin.com/school/brigham-young-university/jobs/">Brigham Young University (BYU)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-georgia/jobs/">University of Georgia</a></li>
+  <li><a href="https://www.linkedin.com/school/iowa-state-university/jobs/">Iowa State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-iowa/jobs/">University of Iowa</a></li>
+  <li><a href="https://www.linkedin.com/school/umassamherst/jobs/">University of Massachusetts Amherst</a></li>
+  <li><a href="https://www.linkedin.com/school/oregon-state-university/jobs/">Oregon State University</a></li>
+  <li><a href="https://www.linkedin.com/school/george-washington-university/jobs/">George Washington University</a></li>
+  <li><a href="https://www.linkedin.com/school/george-mason-university/jobs/">George Mason University</a></li>
+  <li><a href="https://www.linkedin.com/school/vanderbilt-university/jobs/">Vanderbilt University</a></li>
+  <li><a href="https://www.linkedin.com/school/washington-state-university/jobs/">Washington State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-at-buffalo/jobs/">University at Buffalo, State University of New York (SUNY Buffalo)</a></li>
+  <li><a href="https://www.linkedin.com/school/syracuse-university/jobs/">Syracuse University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-south-florida/jobs/">University of South Florida</a></li>
+  <li><a href="https://www.linkedin.com/school/colorado-state-university/jobs/">Colorado State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-notre-dame/jobs/">University of Notre Dame</a></li>
+  <li><a href="https://www.linkedin.com/school/ucsf/jobs/">University of California, San Francisco (UCSF)</a></li>
+  <li><a href="https://www.linkedin.com/school/dartmouth-college/jobs/">Dartmouth College</a></li>
+  <li><a href="https://www.linkedin.com/school/florida-state-university/jobs/">Florida State University</a></li>
+  <li><a href="https://www.linkedin.com/school/rice-university/jobs/">Rice University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-oregon/jobs/">University of Oregon</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-california-santa-cruz/jobs/">University of California, Santa Cruz</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-connecticut/jobs/">University of Connecticut</a></li>
+  <li><a href="https://www.linkedin.com/school/emory-university/jobs/">Emory University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-houston/jobs/">University of Houston</a></li>
+  <li><a href="https://www.linkedin.com/school/uic/jobs/">University of Illinois Chicago (UIC)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-kentucky/jobs/">University of Kentucky</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-california-riverside/jobs/">University of California, Riverside</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-delaware/jobs/">University of Delaware</a></li>
+  <li><a href="https://www.linkedin.com/school/georgia-state-university/jobs/">Georgia State University</a></li>
+  <li><a href="https://www.linkedin.com/school/northeastern-university/jobs/">Northeastern University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-kansas/jobs/">University of Kansas</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-missouri/jobs/">University of Missouri</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-tennessee-knoxville/jobs/">The University of Tennessee, Knoxville</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-new-mexico/jobs/">University of New Mexico</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-central-florida/jobs/">University of Central Florida</a></li>
+  <li><a href="https://www.linkedin.com/school/rochester-institute-of-technology/jobs/">Rochester Institute of Technology</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-miami/jobs/">University of Miami</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-south-carolina/jobs/">University of South Carolina</a></li>
+  <li><a href="https://www.linkedin.com/school/boston-college/jobs/">Boston College</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-phoenix/jobs/">University of Phoenix </a></li>
+  <li><a href="https://www.linkedin.com/school/louisiana-state-university/jobs/">Louisiana State University</a></li>
+  <li><a href="https://www.linkedin.com/school/temple-university/jobs/">Temple University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-north-texas/jobs/">University of North Texas</a></li>
+  <li><a href="https://www.linkedin.com/school/clemson-university/jobs/">Clemson University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-new-hampshire/jobs/">University of New Hampshire</a></li>
+  <li><a href="https://www.linkedin.com/school/fordham-university/jobs/">Fordham University</a></li>
+  <li><a href="https://www.linkedin.com/school/drexel-university/jobs/">Drexel University</a></li>
+  <li><a href="https://www.linkedin.com/school/san-diego-state-university/jobs/">San Diego State University</a></li>
+  <li><a href="https://www.linkedin.com/school/florida-international-university/jobs/">Florida International University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-oklahoma/jobs/">The University of Oklahoma</a></li>
+  <li><a href="https://www.linkedin.com/school/american-university/jobs/">American University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-alabama/jobs/">The University of Alabama</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-cincinnati/jobs/">University of Cincinnati</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-vermont/jobs/">University of Vermont</a></li>
+  <li><a href="https://www.linkedin.com/school/case-western-reserve-university/jobs/">Case Western Reserve University</a></li>
+  <li><a href="https://www.linkedin.com/school/virginia-commonwealth-university/jobs/">Virginia Commonwealth University</a></li>
+  <li><a href="https://www.linkedin.com/school/utah-state-university/jobs/">Utah State University</a></li>
+  <li><a href="https://www.linkedin.com/school/rensselaer-polytechnic-institute/jobs/">Rensselaer Polytechnic Institute</a></li>
+  <li><a href="https://www.linkedin.com/school/oklahoma-state-university/jobs/">Oklahoma State University</a></li>
+  <li><a href="https://www.linkedin.com/school/the-university-of-tennessee-at-martin/jobs/">The University of Tennessee at Martin</a></li>
+  <li><a href="https://www.linkedin.com/school/baylor-university/jobs/">Baylor University</a></li>
+  <li><a href="https://www.linkedin.com/school/west-virginia-university/jobs/">West Virginia University</a></li>
+  <li><a href="https://www.linkedin.com/school/auburn-university/jobs/">Auburn University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-maryland-baltimore-county/jobs/">University of Maryland, Baltimore County</a></li>
+  <li><a href="https://www.linkedin.com/school/stony-brook-university/jobs/">Stony Brook University</a></li>
+  <li><a href="https://www.linkedin.com/school/uab/jobs/">University of Alabama at Birmingham</a></li>
+  <li><a href="https://www.linkedin.com/school/tulane-university/jobs/">Tulane University</a></li>
+  <li><a href="https://www.linkedin.com/school/portland-state-university/jobs/">Portland State University</a></li>
+  <li><a href="https://www.linkedin.com/school/wayne-state-university/jobs/">Wayne State University</a></li>
+  <li><a href="https://www.linkedin.com/school/california-state-university-northridge/jobs/">California State University, Northridge</a></li>
+  <li><a href="https://www.linkedin.com/school/san-jose-state-university/jobs/">San José State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-wisconsin-milwaukee/jobs/">University of Wisconsin-Milwaukee</a></li>
+  <li><a href="https://www.linkedin.com/school/university-at-albany/jobs/">University at Albany, State University of New York (SUNY Albany)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-arkansas/jobs/">University of Arkansas</a></li>
+  <li><a href="https://www.linkedin.com/school/san-francisco-state-university/jobs/">San Francisco State University</a></li>
+  <li><a href="https://www.linkedin.com/school/brandeis-university/jobs/">Brandeis University</a></li>
+  <li><a href="https://www.linkedin.com/school/southern-methodist-university/jobs/">Southern Methodist University (SMU)</a></li>
+  <li><a href="https://www.linkedin.com/school/kent-state-university/jobs/">Kent State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-nevada-reno/jobs/">University of Nevada, Reno</a></li>
+  <li><a href="https://www.linkedin.com/school/mississippi-state-university/jobs/">Mississippi State University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-texas-at-dallas/jobs/">The University of Texas at Dallas</a></li>
+  <li><a href="https://www.linkedin.com/school/texas-tech-university/jobs/">Texas Tech University</a></li>
+  <li><a href="https://www.linkedin.com/school/northern-illinois-university/jobs/">Northern Illinois University</a></li>
+  <li><a href="https://www.linkedin.com/school/college-of-william-&amp;-mary/jobs/">College of William &amp; Mary</a></li>
+  <li><a href="https://www.linkedin.com/school/kansas-state-university/jobs/">Kansas State University</a></li>
+  <li><a href="https://www.linkedin.com/school/iupui/jobs/">Indiana University-Purdue University Indianapolis (IUPUI)</a></li>
+  <li><a href="https://www.linkedin.com/school/marquette-university/jobs/">Marquette University</a></li>
+  <li><a href="https://www.linkedin.com/school/michigan-technological-university/jobs/">Michigan Technological University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-north-carolina-at-charlotte/jobs/">University of North Carolina at Charlotte</a></li>
+  <li><a href="https://www.linkedin.com/school/northern-arizona-university/jobs/">Northern Arizona University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-rhode-island/jobs/">University of Rhode Island</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-denver/jobs/">University of Denver</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-idaho/jobs/">University of Idaho</a></li>
+  <li><a href="https://www.linkedin.com/school/usma/jobs/">United States Military Academy (West Point)</a></li>
+  <li><a href="https://www.linkedin.com/school/loyola-university-chicago/jobs/">Loyola University Chicago</a></li>
+  <li><a href="https://www.linkedin.com/school/santa-clara-university/jobs/">Santa Clara University</a></li>
+  <li><a href="https://www.linkedin.com/school/florida-atlantic-university/jobs/">Florida Atlantic University</a></li>
+</ul>
+
+<div align="right" dir="auto">
+  <b><a href="#Company-wise">↥ Back To Top</a></b>
+</div>
+
+<p>uk</p>
+
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-cambridge/jobs/">University of Cambridge</a></li>
+  <li><a href="https://www.linkedin.com/school/oxforduni/jobs/">University of Oxford </a></li>
+  <li><a href="https://www.linkedin.com/school/imperial-college-london/jobs/">Imperial College London</a></li>
+  <li><a href="https://www.linkedin.com/school/university-college-london/jobs/">UCL (University College London) </a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-edinburgh/jobs/">University of Edinburgh</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-manchester/jobs/">University of Manchester</a></li>
+</ul>
+
+<p>Canada</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-toronto/jobs/">University of Toronto</a></li>
+  <li><a href="https://www.linkedin.com/school/uwaterloo/jobs/">University of Waterloo</a></li>
+  <li><a href="https://www.linkedin.com/school/universityofbc/jobs/">University of British Columbia (UBC)</a></li>
+  <li><a href="https://www.linkedin.com/school/mcgill-university/jobs/">McGill University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-alberta/jobs/">University of Alberta</a></li>
+  <li><a href="https://www.linkedin.com/school/universite-de-montreal/jobs/">University of Montreal</a></li>
+</ul>
+
+<p>Australia</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/australian-national-university/jobs/">Australian National University (ANU)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-melbourne/jobs/">University of Melbourne</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-sydney/jobs/">University of Sydney</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-queensland/jobs/">University of Queensland</a></li>
+  <li><a href="https://www.linkedin.com/school/unsw/jobs/">University of New South Wales (UNSW)</a></li>
+</ul>
+
+<p>Germany</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/technische-universitat-munchen/jobs/">Technical University of Munich (TUM)</a></li>
+  <li><a href="https://www.linkedin.com/school/uni-heidelberg/jobs/">Heidelberg University</a></li>
+  <li><a href="https://www.linkedin.com/school/humboldt-university-berlin/jobs/">Humboldt University of Berlin</a></li>
+  <li><a href="https://www.linkedin.com/school/albert-ludwigs-universitaet-freiburg/jobs/">University of Freiburg</a></li>
+</ul>
+
+<p>France</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/universite-paris-dauphine-psl/jobs/">PSL Research University Paris (Paris Sciences et Lettres)</a></li>
+  <li><a href="https://www.linkedin.com/school/sorbonne-universite/jobs/">Sorbonne University</a></li>
+  <li><a href="https://www.linkedin.com/school/ecole-normale-superieure-de-paris/jobs/">École Normale Supérieure (ENS Paris)</a></li>
+  <li><a href="https://www.linkedin.com/school/universite-de-paris/jobs/">University of Paris (Université de Paris)</a></li>
+  <li><a href="https://www.linkedin.com/school/universite-paris-saclay/jobs/">University of Paris-Saclay</a></li>
+  <li><a href="https://www.linkedin.com/school/pierre-and-marie-curie-university-uptm/jobs/">Marie Curie University (Université Pierre et Marie Curie)</a></li>
+</ul>
+
+<p>Switzerland</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/eth-zurich/jobs/">ETH Zurich (Swiss Federal Institute of Technology)</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-zurich/jobs/">University of Zurich</a></li>
+  <li><a href="https://www.linkedin.com/school/epfl/jobs/">EPFL (École Polytechnique Fédérale de Lausanne)</a></li>
+  <li><a href="https://www.linkedin.com/school/universite-de-geneve/jobs/">University of Geneva</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-basel/jobs/">University of Basel</a></li>
+</ul>
+
+<p>Netherlands</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-amsterdam/jobs/">University of Amsterdam</a></li>
+  <li><a href="https://www.linkedin.com/school/delft-university-of-technology/jobs/">Delft University of Technology</a></li>
+  <li><a href="https://www.linkedin.com/school/utrecht-university/jobs/">Utrecht University</a></li>
+  <li><a href="https://www.linkedin.com/school/leiden-university/jobs/">Leiden University</a></li>
+  <li><a href="https://www.linkedin.com/school/erasmus-university-rotterdam/jobs/">Erasmus University Rotterdam</a></li>
+</ul>
+
+<p>Finland</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-helsinki/jobs/">University of Helsinki</a></li>
+</ul>
+
+<p>India</p>
+
+<ul>
+  <li><a href="https://www.linkedin.com/school/iit-bombay/jobs/">IIT Bombay</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-technology-delhi/jobs/">IIT Delhi</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-technology-madras/jobs/">IIT Madras</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-science/jobs/">Indian Institute of Science (IISc) Bangalore</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-kanpur/jobs/">IIT Kanpur</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-kharagpur/jobs/">IIT Kharagpur</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-technology-roorkee/jobs/">IIT Roorkee</a></li>
+  <li><a href="https://www.linkedin.com/school/national-institute-of-technology-trichy/jobs/">NIT Trichy</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-technology-guwahati/jobs/">IIT Guwahati</a></li>
+  <li><a href="https://www.linkedin.com/school/iithyderabad/jobs/">IIT Hyderabad</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-indore/jobs/">IIT Indore</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-ropar/jobs/">IIT Ropar</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-gandhinagar/jobs/">IIT Gandhinagar</a></li>
+  <li><a href="https://www.linkedin.com/school/iitpatna/jobs/">IIT Patna</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-bhubaneswar/jobs/">IIT Bhubaneswar</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-jodhpur/jobs/">IIT Jodhpur</a></li>
+  <li><a href="https://www.linkedin.com/school/iit-mandi/jobs/">IIT Mandi</a></li>
+  <li><a href="https://www.linkedin.com/school/indian-institute-of-technology-indian-school-of-mines-dhanbad/jobs/">IIT (ISM) Dhanbad</a></li>
+  <li><a href="https://www.linkedin.com/school/national-institute-of-technology-warangal/jobs/">NIT Warangal</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-surathkal/jobs/">NIT Surathkal</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-calicut/jobs/">NIT Calicut</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-rourkela/jobs/">NIT Rourkela</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-durgapur/jobs/">NIT Durgapur</a></li>
+  <li><a href="https://www.linkedin.com/school/nitkurukshetra/jobs/">NIT Kurukshetra</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-silchar/jobs/">NIT Silchar</a></li>
+  <li><a href="https://www.linkedin.com/school/national-institute-of-technology-jamshedpur/jobs/">NIT Jamshedpur</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-hamirpur/jobs/">NIT Hamirpur</a></li>
+  <li><a href="https://www.linkedin.com/school/nit-raipur/jobs/">NIT Raipur</a></li>
+  <li><a href="https://www.linkedin.com/school/national-institute-of-technology-meghalaya/jobs/">NIT Meghalaya</a></li>
+</ul>
+
+<p>China</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/tsinghua-university/jobs/">Tsinghua University</a></li>
+  <li><a href="https://www.linkedin.com/school/peking-university/jobs/">Peking University</a></li>
+  <li><a href="https://www.linkedin.com/school/fudan-university/jobs/">Fudan University</a></li>
+  <li><a href="https://www.linkedin.com/school/shanghai-jiao-tong-university/jobs/">Shanghai Jiao Tong University</a></li>
+  <li><a href="https://www.linkedin.com/school/zhejiang-university/jobs/">Zhejiang University</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-hong-kong/jobs/">University of Hong Kong (HKU)</a></li>
+  <li><a href="https://www.linkedin.com/school/the-hong-kong-university-of-science-and-technology/jobs/">Hong Kong University of Science and Technology (HKUST)</a></li>
+  <li><a href="https://www.linkedin.com/school/chinese-university-of-hong-kong/jobs/">Chinese University of Hong Kong (CUHK)</a></li>
+  <li><a href="https://www.linkedin.com/school/city-university-of-hong-kong/jobs/">City University of Hong Kong (CityU)</a></li>
+  <li><a href="https://www.linkedin.com/school/hong-kong-polytechnic-university/jobs/">Hong Kong Polytechnic University (PolyU)</a></li>
+</ul>
+
+<p>Japan</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-tokyo/jobs/">University of Tokyo</a></li>
+  <li><a href="https://www.linkedin.com/school/kyoto-university/jobs/">Kyoto University</a></li>
+  <li><a href="https://www.linkedin.com/school/osaka-university/jobs/">Osaka University</a></li>
+  <li><a href="https://www.linkedin.com/school/tohoku-university/jobs/">Tohoku University</a></li>
+  <li><a href="https://www.linkedin.com/school/tokyo-institute-of-technology/jobs/">Tokyo Institute of Technology</a></li>
+</ul>
+
+<p>South Korea</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/seoul-national-university/jobs/">Seoul National University (SNU)</a></li>
+  <li><a href="https://www.linkedin.com/school/kaist/jobs/">Korea Advanced Institute of Science and Technology (KAIST)</a></li>
+  <li><a href="https://www.linkedin.com/school/postech/jobs/">Pohang University of Science and Technology (POSTECH)</a></li>
+  <li><a href="https://www.linkedin.com/school/yonsei-university/jobs/">Yonsei University</a></li>
+  <li><a href="https://www.linkedin.com/school/korea-university/jobs/">Korea University</a></li>
+</ul>
+
+<p>Singapore</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/national-university-of-singapore/jobs/">National University of Singapore (NUS)</a></li>
+  <li><a href="https://www.linkedin.com/school/nanyang-technological-university/jobs/">Nanyang Technological University (NTU)</a></li>
+</ul>
+
+<p>Sweden</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/karolinska-institute/jobs/">Karolinska Institute</a></li>
+  <li><a href="https://www.linkedin.com/school/uppsala-university/jobs/">Uppsala University</a></li>
+  <li><a href="https://www.linkedin.com/school/lund-university/jobs/">Lund University</a></li>
+  <li><a href="https://www.linkedin.com/school/stockholm-university/jobs/">Stockholm University</a></li>
+  <li><a href="https://www.linkedin.com/school/kth-royal-institute-of-technology/jobs/">KTH Royal Institute of Technology</a></li>
+</ul>
+
+<p>New Zealand</p>
+<ul>
+  <li><a href="https://www.linkedin.com/school/university-of-auckland/jobs/">University of Auckland</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-otago/jobs/">University of Otago</a></li>
+  <li><a href="https://www.linkedin.com/school/victoria-university-of-wellington/jobs/">Victoria University of Wellington</a></li>
+  <li><a href="https://www.linkedin.com/school/university-of-canterbury/jobs/">University of Canterbury</a></li>
+  <li><a href="https://www.linkedin.com/school/massey-university/jobs/">Massey University</a></li>
+</ul>
+
+<h2 id="contributing">Contributing</h2>
+
+<div align="right" dir="auto">
+  <b><a href="#top">↥ Back To Top</a></b>
+</div>
+
+<p>Contributions are welcome! Before contributing or raising any issues, please read the <a href="CONTRIBUTING.md">contribution guidelines</a> for instructions on how to contribute effectively.</p>
+
+<p>Learn from the community and feel free to submit pull requests to help:</p>
+
+<ul>
+  <li>Fix errors</li>
+  <li>Improve existing sections</li>
+  <li>Add new sections</li>
+</ul>
+
+
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 <a href="https://github.com/pushpakumarbalan" target="_blank" style="color: #00a0dc; text-decoration: none;">Pushpa kumar Balan</a>. Made with ❤️ for job seekers worldwide.</p>
+            <p>⭐ Star this repository if it helped you land your dream job!</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript for Search and Navigation -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing search...');
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                console.log('Search input found');
+                
+                // Handle input events (real-time search)
+                searchInput.addEventListener('input', function(e) {
+                    console.log('Search input:', e.target.value);
+                    performSearch(e.target.value);
+                });
+                
+                // Handle Enter key press
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        console.log('Enter pressed, searching:', e.target.value);
+                        performSearch(e.target.value);
+                        scrollToFirstResult();
+                    }
+                    
+                    // Clear search on Escape  
+                    if (e.key === 'Escape') {
+                        e.target.value = '';
+                        performSearch('');
+                    }
+                });
+            } else {
+                console.log('Search input NOT found');
+            }
+            
+            function performSearch(searchTerm) {
+                console.log('Performing search for:', searchTerm);
+                searchTerm = searchTerm.toLowerCase().trim();
+                
+                // Get all LinkedIn links, but exclude "Back To Top" links
+                const allLinkedinLinks = document.querySelectorAll('a[href*="linkedin.com"]');
+                const linkedinLinks = Array.from(allLinkedinLinks).filter(link => {
+                    const linkText = link.textContent.trim();
+                    // Exclude "Back To Top" links and any links containing the up arrow
+                    return !linkText.includes('Back To Top') && !linkText.includes('↥');
+                });
+                console.log('Found LinkedIn links (excluding Back To Top):', linkedinLinks.length);
+                
+                if (searchTerm === '') {
+                    // Show everything when search is cleared
+                    document.querySelectorAll('h2, h3, h4, p, ul, li, div').forEach(el => {
+                        el.style.display = '';
+                    });
+                    
+                    // Remove all highlights
+                    linkedinLinks.forEach(link => {
+                        removeHighlight(link);
+                    });
+                    
+                    hideNoResults();
+                    updateResultsCount(linkedinLinks.length, linkedinLinks.length);
+                    console.log('Cleared search, showing all items');
+                    return;
+                }
+                
+                let visibleCount = 0;
+                
+                // Hide everything first
+                document.querySelectorAll('h2, h3, h4, p, ul, li, div[align="right"]').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Remove previous highlights
+                linkedinLinks.forEach(link => {
+                    removeHighlight(link);
+                });
+                
+                // Find matches and show only essential context
+                linkedinLinks.forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    if (linkText.includes(searchTerm)) {
+                        const listItem = link.closest('li');
+                        if (listItem) {
+                            // Show the matching list item
+                            listItem.style.display = '';
+                            visibleCount++;
+                            
+                            // Show the parent list
+                            const parentList = listItem.closest('ul');
+                            if (parentList) {
+                                parentList.style.display = '';
+                                
+                                // Find and show only the immediate context for this specific match
+                                let element = parentList.previousElementSibling;
+                                let immediateHeading = null;
+                                
+                                // Look backwards for the immediate heading (H4, P, or H2)
+                                while (element) {
+                                    if (element.tagName === 'H4') {
+                                        // Company letter sections (like "W companies")
+                                        immediateHeading = element;
+                                        element.style.display = '';
+                                        break;
+                                    } else if (element.tagName === 'P' && element.textContent.trim() !== '' && element.textContent.trim().length < 50) {
+                                        // Country/category (like "US", "India", "UK")
+                                        immediateHeading = element;
+                                        element.style.display = '';
+                                        break;
+                                    } else if (element.tagName === 'H2') {
+                                        // Main section (🏢Company-wise, 🎓University-wise)
+                                        element.style.display = '';
+                                        break;
+                                    }
+                                    element = element.previousElementSibling;
+                                }
+                                
+                                // Now find the main section heading if we haven't already
+                                if (immediateHeading) {
+                                    element = immediateHeading.previousElementSibling;
+                                    while (element) {
+                                        if (element.tagName === 'H2') {
+                                            element.style.display = '';
+                                            break;
+                                        }
+                                        element = element.previousElementSibling;
+                                    }
+                                }
+                            }
+                            
+                            // Highlight the matching text
+                            highlightText(link, searchTerm);
+                        }
+                    }
+                });
+                
+                // Update results count
+                updateResultsCount(visibleCount, linkedinLinks.length);
+                
+                if (visibleCount === 0) {
+                    showNoResults(searchTerm);
+                } else {
+                    hideNoResults();
+                }
+                
+                console.log(`Search completed. Found ${visibleCount} matches.`);
+            }
+            
+
+            
+
+            
+            function highlightText(element, searchTerm) {
+                if (!element.getAttribute('data-original-text')) {
+                    element.setAttribute('data-original-text', element.textContent);
+                }
+                
+                const originalText = element.getAttribute('data-original-text');
+                const regex = new RegExp(`(${escapeRegex(searchTerm)})`, 'gi');
+                element.innerHTML = originalText.replace(regex, '<mark style="background: yellow; padding: 1px 2px;">$1</mark>');
+            }
+            
+            function removeHighlight(element) {
+                const originalText = element.getAttribute('data-original-text');
+                if (originalText) {
+                    element.textContent = originalText;
+                }
+            }
+            
+            function escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            
+            function scrollToFirstResult() {
+                const firstVisible = document.querySelector('li:not([style*="display: none"]) a[href*="linkedin.com"]');
+                if (firstVisible) {
+                    firstVisible.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    console.log('Scrolled to first result');
+                } else {
+                    console.log('No visible results to scroll to');
+                }
+            }
+            
+            function updateResultsCount(visible, total) {
+                let counter = document.getElementById('search-counter');
+                if (!counter) {
+                    counter = document.createElement('div');
+                    counter.id = 'search-counter';
+                    counter.style.cssText = `
+                        text-align: center;
+                        padding: 10px;
+                        margin: 20px 0;
+                        background: var(--accent-color);
+                        border-radius: 8px;
+                        font-weight: 500;
+                        color: var(--text-secondary);
+                    `;
+                    const main = document.querySelector('main .container');
+                    if (main) {
+                        main.insertBefore(counter, main.firstChild);
+                    }
+                }
+                
+                if (visible < total) {
+                    counter.textContent = `Showing ${visible} of ${total} results`;
+                    counter.style.display = 'block';
+                } else {
+                    counter.style.display = 'none';
+                }
+            }
+            
+            function showNoResults(term) {
+                let noResults = document.getElementById('no-results');
+                if (!noResults) {
+                    noResults = document.createElement('div');
+                    noResults.id = 'no-results';
+                    noResults.style.cssText = `
+                        text-align: center;
+                        padding: 40px 20px;
+                        background: var(--background-light);
+                        border-radius: 12px;
+                        margin: 20px 0;
+                        box-shadow: var(--shadow);
+                        border: 1px solid var(--border-color);
+                    `;
+                    const main = document.querySelector('main .container .content-section');
+                    if (main) {
+                        main.appendChild(noResults);
+                    }
+                }
+                
+                noResults.innerHTML = `
+                    <h3 style="color: var(--text-secondary); margin-bottom: 15px;">🔍 No results found for "${term}"</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Try searching with different keywords or check the spelling.</p>
+                    <button onclick="document.getElementById('searchInput').value = ''; document.getElementById('searchInput').dispatchEvent(new Event('input'));" 
+                            style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 14px;">
+                        Clear Search
+                    </button>
+                `;
+                noResults.style.display = 'block';
+            }
+            
+            function hideNoResults() {
+                const noResults = document.getElementById('no-results');
+                if (noResults) {
+                    noResults.style.display = 'none';
+                }
+            }
+        });
+        
+        // Section navigation
+        function showSection(section) {
+            console.log('showSection called with:', section);
+            
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Clear search when switching sections
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput && searchInput.value) {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+            }
+            
+            // Smooth scroll to section with improved targeting
+            let targetElement = null;
+            
+            if (section === 'companies') {
+                // Multiple strategies to find Company section
+                targetElement = document.querySelector('a[href="#Company-wise"]')?.closest('h2') ||
+                               document.querySelector('h2 a[href="#Company-wise"]')?.parentElement ||
+                               Array.from(document.querySelectorAll('h2')).find(h2 => 
+                                   h2.textContent.includes('Company-wise') || 
+                                   h2.innerHTML.includes('Company-wise')
+                               ) ||
+                               document.querySelector('h2');
+                console.log('Companies target:', targetElement);
+                               
+            } else if (section === 'universities') {
+                // Look for University section
+                targetElement = Array.from(document.querySelectorAll('h2, h3')).find(h => 
+                    h.textContent.includes('University') || 
+                    h.textContent.includes('🎓') ||
+                    h.innerHTML.includes('University')
+                );
+                console.log('Universities target:', targetElement);
+                
+            } else if (section === 'contributing') {
+                // Look for Contributing section
+                targetElement = Array.from(document.querySelectorAll('h2, h3')).find(h => 
+                    h.textContent.includes('Contributing') ||
+                    h.innerHTML.includes('Contributing')
+                );
+                console.log('Contributing target:', targetElement);
+            }
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                console.log('No target found, using fallback for:', section);
+                // Fallback scroll positions
+                if (section === 'companies') {
+                    window.scrollTo({ top: 300, behavior: 'smooth' });
+                } else if (section === 'universities') {
+                    // Try to find any heading with university-related content
+                    const allHeadings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                    const universityHeading = Array.from(allHeadings).find(h => 
+                        h.textContent.toLowerCase().includes('university') ||
+                        h.textContent.includes('🎓')
+                    );
+                    if (universityHeading) {
+                        universityHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        window.scrollTo({ top: document.body.scrollHeight * 0.7, behavior: 'smooth' });
+                    }
+                } else if (section === 'contributing') {
+                    // Scroll to bottom area where contributing usually is
+                    window.scrollTo({ top: document.body.scrollHeight - 500, behavior: 'smooth' });
+                }
+            }
+        }
+        
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                let target = document.querySelector(href);
+                
+                // Special handling for alphabet navigation (company sections)
+                if (!target && href.includes('-companies')) {
+                    const letter = href.replace('#', '').replace('-companies', '').toUpperCase();
+                    // Look for headings like "A companies", "B companies", etc.
+                    const headings = document.querySelectorAll('h4');
+                    for (let heading of headings) {
+                        if (heading.textContent.trim() === `${letter} companies` || 
+                            heading.textContent.trim() === `${letter.toLowerCase()} companies` ||
+                            heading.textContent.trim() === `# companies` && letter === '#') {
+                            target = heading;
+                            break;
+                        }
+                    }
+                }
+                
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    console.log('Target not found for:', href);
+                }
+            });
+        });
+        
+        // Add loading animation for external links
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.addEventListener('click', function() {
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            });
+        });
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.focus();
+                    searchInput.select();
+                }
+            }
+        });
+        
+        // Back to Top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Make all "Back to Top" links work
+        document.addEventListener('click', function(e) {
+            // Check if the clicked element is a link that contains "Back To Top" text or the up arrow
+            if (e.target.tagName === 'A' && 
+                (e.target.textContent.includes('Back To Top') || 
+                 e.target.textContent.includes('↥') ||
+                 e.target.href.includes('#Company-wise') ||
+                 e.target.href.includes('#top'))) {
+                e.preventDefault();
+                scrollToTop();
+            }
+        });
+    </script>
+</body>
+</html>
